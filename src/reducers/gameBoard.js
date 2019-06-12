@@ -21,6 +21,7 @@ export default function gameBoard(state = initialState, action) {
       };
       
 		case ACTIONS.ALLOCATE_BOMB:
+		case ACTIONS.ALLOCATE_ADJACENT_BOMBS:
 			return {
 				...state,
 				squares: [
@@ -35,7 +36,8 @@ export default function gameBoard(state = initialState, action) {
       };
       case ACTIONS.REVEAL_SQUARE:
           return {
-            ...state,
+						...state,
+						isFirstRevealed: true,
             squares: [
               ...state.squares.slice(0, action.payload.row),
               [
