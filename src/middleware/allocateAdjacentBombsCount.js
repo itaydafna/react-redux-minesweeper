@@ -1,5 +1,6 @@
-import ACTIONS, { allocateAdjacentBombs } from '../actions';
+import ACTIONS from '../constants/ACTION_TYPES'
 import traverseAdjacentCells from '../services/traverseAdjacentCells'
+import { allocateAdjacentBombs } from '../actions';
 
 export default function({ getState, dispatch }) {
 	return next => action => {

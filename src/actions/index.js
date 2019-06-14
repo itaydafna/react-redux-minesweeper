@@ -1,10 +1,4 @@
-const ACTIONS = {
-	INIT_GAME_BOARD: 'INIT_GAME_BOARD',
-  ALLOCATE_BOMB: 'ALLOCATE_BOMB',
-  ALLOCATE_ADJACENT_BOMBS: 'ALLOCATE_ADJACENT_BOMBS',
-  REVEAL_CELL: 'REVEAL_CELL',
-  GAME_OVER: 'GAME_OVER'
-};
+import ACTIONS from '../constants/ACTION_TYPES'
 
 export const initGameBoard = payload => ({ type: ACTIONS.INIT_GAME_BOARD, payload });
 
@@ -15,5 +9,3 @@ export const allocateAdjacentBombs = payload => ({ type: ACTIONS.ALLOCATE_ADJACE
 export const revealCell = payload => ({ type: ACTIONS.REVEAL_CELL, payload });
 
 export const gameOver = () => ({ type: ACTIONS.GAME_OVER });
-
-export default ACTIONS;

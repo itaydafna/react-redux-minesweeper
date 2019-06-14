@@ -1,5 +1,6 @@
+import ACTIONS from '../constants/ACTION_TYPES'
 import { random, flatten } from 'lodash/fp';
-import ACTIONS, { allocateBomb } from '../actions';
+import { allocateBomb } from '../actions';
 
 export default function({ getState, dispatch }) {
 	return next => action => {

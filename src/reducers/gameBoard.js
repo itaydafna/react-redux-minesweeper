@@ -1,4 +1,4 @@
-import ACTIONS from '../actions';
+import ACTIONS from '../constants/ACTION_TYPES'
 import cell from './cell';
 
 const initialState = {

@@ -1,5 +1,6 @@
-import ACTIONS, { revealCell, gameOver } from '../actions';
+import ACTIONS from '../constants/ACTION_TYPES'
 import traverseAdjacentCells from '../services/traverseAdjacentCells';
+import { revealCell, gameOver } from '../actions';
 
 export default function({ getState, dispatch }) {
 	return next => action => {
