@@ -22,6 +22,7 @@ export default function({ getState, dispatch }) {
 
 		//if empty cell is revealed  - start "chain reaction" - revealing all adjacent unrevealed none-bomb grid
 		if (!cell.adjacentBombs) {
+			next(action);
 			traverseAdjacentCells({
 				grid,
 				row,
@@ -29,7 +30,7 @@ export default function({ getState, dispatch }) {
 				callback: ({ row, column, cell }) =>
 					!cell.isBomb && !cell.isRevealed && dispatch(revealCell({ row, column })),
 			});
-			return next(action);
+			return;
 		}
 
 		next(action);
