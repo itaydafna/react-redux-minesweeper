@@ -1,33 +1,42 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import './App.css';
-import { revealCell } from './actions';
+import { revealCell, markCell } from './actions';
+import MARK_TYPES from './constants/MARK_TYPES';
 
-function App({ grid, revealCell }) {
-	const onCellClick = ({row, column}) => {
-    console.log('clicked:',{row, column});
-    !grid[row][column].isRevealed && revealCell({row, column})
-  }
+function App({ grid, revealCell, markCell }) {
+	const onCellClick = ({ row, column }) => {
+		!grid[row][column].isRevealed && revealCell({ row, column });
+	};
+
+	const onCellRightClick = ({ row, column }) => {
+		!grid[row][column].isRevealed && markCell({ row, column });
+	};
+
 	return (
 		<div className="App">
 			{grid.map((columns, row) => (
-				<div key={row} style={{ display: 'flex' }}>
+				<div key={row} style={{ display: 'flex', justifyContent: 'center' }}>
 					{columns.map((cell, column) => (
 						<div
-              key={column}
-              onClick={()=>onCellClick({row,column})}
+							key={column}
+							onClick={() => onCellClick({ row, column })}
+							onContextMenu={event => event.preventDefault() || onCellRightClick({ row, column })}
 							style={{
-								height: 70,
-								width: 70,
+								height: 40,
+								width: 40,
+								border: '1px solid black',
 								display: 'flex',
 								alignItems: 'center',
-                justifyContent: 'center',
-                cursor: 'pointer'
+								justifyContent: 'center',
+								cursor: 'pointer',
 							}}
 						>
-							{!cell.isRevealed && 'hidden'}
-							{cell.isRevealed && cell.isBomb && 'bomb'}
+							{!cell.isRevealed && ''}
+							{cell.isRevealed && cell.isBomb && '💣'}
 							{cell.isRevealed && !cell.isBomb && cell.adjacentBombs}
+							{!cell.isRevealed && cell.mark === MARK_TYPES.FLAG && '🚩'}
+							{!cell.isRevealed && cell.mark === MARK_TYPES.QUESTION_MARK && '?'}
 						</div>
 					))}
 				</div>
@@ -42,6 +51,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
 	revealCell,
+	markCell,
 };
 
 export default connect(

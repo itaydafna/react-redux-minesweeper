@@ -1,4 +1,4 @@
-import ACTIONS from '../constants/ACTION_TYPES'
+import ACTIONS from '../constants/ACTION_TYPES';
 import traverseAdjacentCells from '../services/traverseAdjacentCells';
 import { revealCell, gameOver } from '../actions';
 
@@ -28,8 +28,7 @@ export default function({ getState, dispatch }) {
 				row,
 				column,
 				callback: ({ row, column, cell }) =>
-					console.log({ row, column, cell }) ||
-					(!cell.isBomb && !cell.isRevealed && dispatch(revealCell({ row, column }))),
+					!cell.isBomb && !cell.isRevealed && dispatch(revealCell({ row, column })),
 			});
 		}
 
