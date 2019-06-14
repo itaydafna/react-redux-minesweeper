@@ -14,6 +14,7 @@ export default function square(state = initialState, action) {
 		case ACTIONS.ALLOCATE_ADJACENT_BOMBS:
 			return { ...state, adjacentBombs: action.payload.adjacentBombs };
 		case ACTIONS.REVEAL_SQUARE:
+		case ACTIONS.GAME_OVER:
 			return { ...state, isRevealed: true };
 		default:
 			return state;

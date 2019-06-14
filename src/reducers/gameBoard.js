@@ -28,6 +28,8 @@ function squares(state = initialState.squares, action) {
 				],
 				...state.slice(action.payload.row + 1),
 			];
+		case ACTIONS.GAME_OVER:
+			return state.map(row=>row.map(s=>square(s,action)))	
 		default:
 			return state;
 	}
@@ -41,19 +43,21 @@ export default function gameBoard(state = initialState, action) {
 				columns: action.payload.columns,
 				rows: action.payload.rows,
 				bombs: action.payload.bombs,
-				squares: squares(state.squares,action),
+				squares: squares(state.squares, action),
 			};
 
 		case ACTIONS.ALLOCATE_BOMB:
 		case ACTIONS.ALLOCATE_ADJACENT_BOMBS:
+		case ACTIONS.GAME_OVER:
 			return {
 				...state,
-				squares:  squares(state.squares,action)}
+				squares: squares(state.squares, action),
+			};
 		case ACTIONS.REVEAL_SQUARE:
 			return {
 				...state,
 				isFirstRevealed: true,
-				squares:  squares(state.squares,action)
+				squares: squares(state.squares, action),
 			};
 
 		default:
