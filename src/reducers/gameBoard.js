@@ -1,35 +1,47 @@
 import ACTIONS from '../actions';
-import square from './square';
+import cell from './cell';
 
 const initialState = {
 	isFirstRevealed: false,
 	columns: 0,
 	rows: 0,
 	bombs: 0,
-	squares: [],
+	grid: [],
 };
 
-// squares reducer TODO: consider moving to a sperate module
-function squares(state = initialState.squares, action) {
+function row(state = [], action) {
 	switch (action.type) {
 		case ACTIONS.INIT_GAME_BOARD:
-			return [...new Array(action.payload.rows)].map(row =>
-				[...new Array(action.payload.columns)].map(col => square(undefined, action))
-			);
+			return [...new Array(action.payload.columns)].map(() => cell(undefined, action));
 		case ACTIONS.ALLOCATE_BOMB:
 		case ACTIONS.ALLOCATE_ADJACENT_BOMBS:
-		case ACTIONS.REVEAL_SQUARE:
+		case ACTIONS.REVEAL_CELL:
+			return [
+				...state.slice(0, action.payload.column),
+				cell(state[action.payload.column], action),
+				...state.slice(action.payload.column + 1),
+			];
+		case ACTIONS.GAME_OVER:
+			return state.map(c => cell(c, action));
+		default:
+			return state;
+	}
+}
+
+function grid(state = initialState.grid, action) {
+	switch (action.type) {
+		case ACTIONS.INIT_GAME_BOARD:
+			return [...new Array(action.payload.rows)].map(() => row(undefined, action));
+		case ACTIONS.ALLOCATE_BOMB:
+		case ACTIONS.ALLOCATE_ADJACENT_BOMBS:
+		case ACTIONS.REVEAL_CELL:
 			return [
 				...state.slice(0, action.payload.row),
-				[
-					...state[action.payload.row].slice(0, action.payload.column),
-					square(state[action.payload.row][action.payload.column], action),
-					...state[action.payload.row].slice(action.payload.column + 1),
-				],
+				row(state[action.payload.row], action),
 				...state.slice(action.payload.row + 1),
 			];
 		case ACTIONS.GAME_OVER:
-			return state.map(row=>row.map(s=>square(s,action)))	
+			return state.map(r => row(r, action));
 		default:
 			return state;
 	}
@@ -43,7 +55,7 @@ export default function gameBoard(state = initialState, action) {
 				columns: action.payload.columns,
 				rows: action.payload.rows,
 				bombs: action.payload.bombs,
-				squares: squares(state.squares, action),
+				grid: grid(state.grid, action),
 			};
 
 		case ACTIONS.ALLOCATE_BOMB:
@@ -51,13 +63,13 @@ export default function gameBoard(state = initialState, action) {
 		case ACTIONS.GAME_OVER:
 			return {
 				...state,
-				squares: squares(state.squares, action),
+				grid: grid(state.grid, action),
 			};
-		case ACTIONS.REVEAL_SQUARE:
+		case ACTIONS.REVEAL_CELL:
 			return {
 				...state,
 				isFirstRevealed: true,
-				squares: squares(state.squares, action),
+				grid: grid(state.grid, action),
 			};
 
 		default:

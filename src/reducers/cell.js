@@ -7,13 +7,13 @@ const initialState = {
 	mark: 'none',
 };
 
-export default function square(state = initialState, action) {
+export default function cell(state = initialState, action) {
 	switch (action.type) {
 		case ACTIONS.ALLOCATE_BOMB:
 			return { ...state, isBomb: true };
 		case ACTIONS.ALLOCATE_ADJACENT_BOMBS:
 			return { ...state, adjacentBombs: action.payload.adjacentBombs };
-		case ACTIONS.REVEAL_SQUARE:
+		case ACTIONS.REVEAL_CELL:
 		case ACTIONS.GAME_OVER:
 			return { ...state, isRevealed: true };
 		default:

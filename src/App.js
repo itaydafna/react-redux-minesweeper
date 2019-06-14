@@ -1,21 +1,21 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import './App.css';
-import { revealSquare } from './actions';
+import { revealCell } from './actions';
 
-function App({ squares, revealSquare }) {
-	const onSquareClick = ({row, column}) => {
+function App({ grid, revealCell }) {
+	const onCellClick = ({row, column}) => {
     console.log('clicked:',{row, column});
-    !squares[row][column].isRevealed && revealSquare({row, column})
+    !grid[row][column].isRevealed && revealCell({row, column})
   }
 	return (
 		<div className="App">
-			{squares.map((columns, row) => (
+			{grid.map((columns, row) => (
 				<div key={row} style={{ display: 'flex' }}>
-					{columns.map((square, column) => (
+					{columns.map((cell, column) => (
 						<div
               key={column}
-              onClick={()=>onSquareClick({row,column})}
+              onClick={()=>onCellClick({row,column})}
 							style={{
 								height: 70,
 								width: 70,
@@ -25,9 +25,9 @@ function App({ squares, revealSquare }) {
                 cursor: 'pointer'
 							}}
 						>
-							{!square.isRevealed && 'hidden'}
-							{square.isRevealed && square.isBomb && 'bomb'}
-							{square.isRevealed && !square.isBomb && square.adjacentBombs}
+							{!cell.isRevealed && 'hidden'}
+							{cell.isRevealed && cell.isBomb && 'bomb'}
+							{cell.isRevealed && !cell.isBomb && cell.adjacentBombs}
 						</div>
 					))}
 				</div>
@@ -37,11 +37,11 @@ function App({ squares, revealSquare }) {
 }
 
 const mapStateToProps = state => ({
-	squares: state.gameBoard.squares,
+	grid: state.gameBoard.grid,
 });
 
 const mapDispatchToProps = {
-	revealSquare,
+	revealCell,
 };
 
 export default connect(

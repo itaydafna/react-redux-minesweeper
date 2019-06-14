@@ -3,37 +3,37 @@ import ACTIONS, { allocateAdjacentBombs } from '../actions';
 export default function({ getState, dispatch }) {
 	return next => action => {
 		const {
-			gameBoard: { isFirstRevealed, squares },
+			gameBoard: { isFirstRevealed, grid },
 		} = getState();
-		if (isFirstRevealed || action.type !== ACTIONS.REVEAL_SQUARE) {
+		if (isFirstRevealed || action.type !== ACTIONS.REVEAL_CELL) {
 			return next(action);
 		}
 
-		squares.forEach((columns, row) => {
+		grid.forEach((columns, row) => {
 			columns.forEach((_, column) => {
 				let adjacentBombs = 0;
-				if (squares[row - 1] && squares[row - 1][column - 1] && squares[row - 1][column - 1].isBomb) {
+				if (grid[row - 1] && grid[row - 1][column - 1] && grid[row - 1][column - 1].isBomb) {
 					++adjacentBombs;
 				}
-				if (squares[row - 1] && squares[row - 1][column] && squares[row - 1][column].isBomb) {
+				if (grid[row - 1] && grid[row - 1][column] && grid[row - 1][column].isBomb) {
 					++adjacentBombs;
 				}
-				if (squares[row - 1] && squares[row - 1][column + 1] && squares[row - 1][column + 1].isBomb) {
+				if (grid[row - 1] && grid[row - 1][column + 1] && grid[row - 1][column + 1].isBomb) {
 					++adjacentBombs;
 				}
-				if (squares[row][column - 1] && squares[row][column - 1].isBomb) {
+				if (grid[row][column - 1] && grid[row][column - 1].isBomb) {
 					++adjacentBombs;
 				}
-				if (squares[row][column + 1] && squares[row][column + 1].isBomb) {
+				if (grid[row][column + 1] && grid[row][column + 1].isBomb) {
 					++adjacentBombs;
 				}
-				if (squares[row + 1] && squares[row + 1][column - 1] && squares[row + 1][column - 1].isBomb) {
+				if (grid[row + 1] && grid[row + 1][column - 1] && grid[row + 1][column - 1].isBomb) {
 					++adjacentBombs;
 				}
-				if (squares[row + 1] && squares[row + 1][column] && squares[row + 1][column].isBomb) {
+				if (grid[row + 1] && grid[row + 1][column] && grid[row + 1][column].isBomb) {
 					++adjacentBombs;
 				}
-				if (squares[row + 1] && squares[row + 1][column + 1] && squares[row + 1][column + 1].isBomb) {
+				if (grid[row + 1] && grid[row + 1][column + 1] && grid[row + 1][column + 1].isBomb) {
 					++adjacentBombs;
 				}
 				dispatch(allocateAdjacentBombs({ row, column, adjacentBombs }));
