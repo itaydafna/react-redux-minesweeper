@@ -1,0 +1,5 @@
+export default {
+	BOARD_CONFIG: 'BOARD_CONFIG',
+	PLAY: 'PLAY',
+	GAME_OVER: 'GAME_OVER',
+};

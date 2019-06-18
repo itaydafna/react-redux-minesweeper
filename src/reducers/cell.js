@@ -14,19 +14,16 @@ export default function cell(state = initialState, action) {
 			return { ...state, isBomb: true };
 		case ACTIONS.ALLOCATE_ADJACENT_BOMBS:
 			return { ...state, adjacentBombs: action.payload.adjacentBombs };
-		case ACTIONS.MARK_CELL:
+		case ACTIONS.SET_MARK:
 			return {
 				...state,
-				mark:
-					state.mark === MARK_TYPES.NONE
-						? MARK_TYPES.FLAG
-						: state.mark === MARK_TYPES.FLAG
-						? MARK_TYPES.QUESTION_MARK
-						: MARK_TYPES.NONE,
+				mark: action.payload.mark,
 			};
 		case ACTIONS.REVEAL_CELL:
 		case ACTIONS.GAME_OVER:
 			return { ...state, isRevealed: true };
+		case ACTIONS.RESET:
+			return initialState;
 		default:
 			return state;
 	}

@@ -5,11 +5,8 @@ import App from './App';
 import configureStore from './configureStore';
 import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux';
-import { initGameBoard } from './actions';
 
 const store = configureStore();
-
-store.dispatch(initGameBoard({ rows: 5, columns: 8, bombs: 4 }));
 
 ReactDOM.render(
 	<Provider store={store}>

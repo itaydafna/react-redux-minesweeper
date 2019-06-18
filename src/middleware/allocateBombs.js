@@ -1,13 +1,13 @@
-import ACTIONS from '../constants/ACTION_TYPES'
+import ACTIONS from '../constants/ACTION_TYPES';
 import { random, flatten } from 'lodash/fp';
 import { allocateBomb } from '../actions';
 
 export default function({ getState, dispatch }) {
 	return next => action => {
 		const {
-			gameBoard: { isFirstRevealed, bombs, columns, rows },
+			gameBoard: { isDirty, bombs, columns, rows },
 		} = getState();
-		if (isFirstRevealed || action.type !== ACTIONS.REVEAL_CELL) {
+		if (isDirty || action.type !== ACTIONS.REVEAL_CELL) {
 			return next(action);
 		}
 
