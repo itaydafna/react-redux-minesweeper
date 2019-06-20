@@ -13,4 +13,5 @@ export const {
 	startGame,
 	gameOver,
 	reset,
+	incrementTime,
 } = createActions({}, ...Object.values(ACTIONS));

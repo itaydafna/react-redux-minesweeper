@@ -5,7 +5,7 @@ import { revealCell, markCell, configGameBoard, reset } from './actions';
 import MARK_TYPES from './constants/MARK_TYPES';
 import GAME_STAGE_TYPES from './constants/GAME_STAGE_TYPES';
 
-function App({ grid, revealCell, markCell, gameStage, rows: r, columns: c, bombs: b, configGameBoard, reset }) {
+function App({ grid, revealCell, markCell, gameStage, rows: r, columns: c, bombs: b, configGameBoard, reset, time }) {
 	const onCellClick = ({ row, column }) => {
 		!grid[row][column].isRevealed && revealCell({ row, column });
 	};
@@ -86,6 +86,7 @@ function App({ grid, revealCell, markCell, gameStage, rows: r, columns: c, bombs
 					))}
 				</div>
 			))}
+			<span style={{ marginRight: 10, fontSize: 20 }}>{time}</span>
 			{gameStage === GAME_STAGE_TYPES.GAME_OVER && (
 				<div>
 					<button onClick={reset}>RESET</button>
@@ -101,6 +102,7 @@ const mapStateToProps = state => ({
 	rows: state.gameBoard.rows,
 	columns: state.gameBoard.columns,
 	bombs: state.gameBoard.bombs,
+	time: state.time,
 });
 
 const mapDispatchToProps = {
