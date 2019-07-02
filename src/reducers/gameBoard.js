@@ -3,6 +3,8 @@ import cell from './cell';
 
 const initialState = {
 	isDirty: false,
+	//when mousedown on unrevealed cell
+	danger: false,
 	columns: 6,
 	rows: 6,
 	bombs: 6,
@@ -93,6 +95,12 @@ export default function gameBoard(state = initialState, action) {
 				isDirty: false,
 				flags: 0,
 				grid: grid(state.grid, action),
+			};
+
+		case ACTIONS.SET_DANGER:
+			return {
+				...state,
+				danger: action.payload.danger,
 			};
 
 		default:

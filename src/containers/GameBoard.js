@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { revealCell, markCell } from '../actions';
+import { revealCell, markCell, setDanger } from '../actions';
 import Cell from '../components/Cell';
 
-function GameBoard({ grid, revealCell, markCell }) {
+function GameBoard({ grid, revealCell, markCell, setDanger }) {
 	const onCellClick = ({ row, column }) => {
 		!grid[row][column].isRevealed && revealCell({ row, column });
 	};
@@ -11,6 +11,8 @@ function GameBoard({ grid, revealCell, markCell }) {
 	const onCellRightClick = ({ row, column }) => {
 		!grid[row][column].isRevealed && markCell({ row, column });
 	};
+
+	const onCellMouseDown = e => e.nativeEvent.which === 1 && setDanger(true);
 
 	return grid.map((columns, row) => (
 		<div key={row} style={{ display: 'flex', justifyContent: 'center' }}>
@@ -20,6 +22,7 @@ function GameBoard({ grid, revealCell, markCell }) {
 					cell={cell}
 					onCellClick={() => onCellClick({ row, column })}
 					onCellRightClick={() => onCellRightClick({ row, column })}
+					onCellMouseDown={onCellMouseDown}
 				/>
 			))}
 		</div>
@@ -33,6 +36,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
 	revealCell,
 	markCell,
+	setDanger,
 };
 
 export default connect(

@@ -5,15 +5,16 @@ import { createSelector } from 'reselect';
 import MARK_TYPES from '../constants/MARK_TYPES';
 import GAME_STAGE_TYPES from '../constants/GAME_STAGE_TYPES';
 
-function ResetButton({ reset, isGameWon, gameStage, winGame }) {
+function ResetButton({ reset, isGameWon, gameStage, winGame, danger }) {
 	useEffect(() => {
 		if (isGameWon) winGame();
 	}, [isGameWon, winGame]);
 	return (
 		<button onClick={reset}>
-			{(gameStage === GAME_STAGE_TYPES.PLAY || gameStage === GAME_STAGE_TYPES.BOARD_CONFIG) && '😀'}
-			{gameStage === GAME_STAGE_TYPES.GAME_WON && '😎'}
-			{gameStage === GAME_STAGE_TYPES.GAME_LOST && '😵'}
+			{!danger && (gameStage === GAME_STAGE_TYPES.PLAY || gameStage === GAME_STAGE_TYPES.BOARD_CONFIG) && '😀'}
+			{!danger && gameStage === GAME_STAGE_TYPES.GAME_WON && '😎'}
+			{!danger && gameStage === GAME_STAGE_TYPES.GAME_LOST && '😵'}
+			{danger && '😧'}
 		</button>
 	);
 }
@@ -31,6 +32,7 @@ const isGameWonSelector = createSelector(
 const mapStateToProps = state => ({
 	isGameWon: isGameWonSelector(state),
 	gameStage: state.gameStage,
+	danger: state.gameBoard.danger,
 });
 
 const mapDispatchToProps = {

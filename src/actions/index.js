@@ -1,6 +1,8 @@
 import { createActions } from 'redux-actions';
 import ACTIONS from '../constants/ACTION_TYPES';
 
+const { SET_DANGER, ...identityActions } = ACTIONS;
+
 export const {
 	configGameBoard,
 	allocateBomb,
@@ -15,4 +17,5 @@ export const {
 	winGame,
 	reset,
 	incrementTime,
-} = createActions({}, ...Object.values(ACTIONS));
+	setDanger,
+} = createActions({ [SET_DANGER]: danger => ({ danger }) }, ...Object.values(identityActions));

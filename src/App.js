@@ -3,12 +3,15 @@ import GameConfig from './containers/GameConfig';
 import ResetButton from './containers/ResetButton';
 import GameBoard from './containers/GameBoard';
 import GamePanel from './containers/GamePanel';
+import { connect } from 'react-redux';
+import { setDanger } from './actions';
 
 import './App.css';
 
-export default function App() {
+function App({ danger, setDanger }) {
+	const cancelDanger = () => danger && setDanger(false);
 	return (
-		<div className="App">
+		<div className="App" onMouseUp={e => e.nativeEvent.which === 1 && cancelDanger()} onMouseLeave={cancelDanger}>
 			<ResetButton />
 			<GameConfig />
 			<GameBoard />
@@ -16,3 +19,12 @@ export default function App() {
 		</div>
 	);
 }
+
+const mapStateToProps = state => ({
+	danger: state.gameBoard.danger,
+});
+
+export default connect(
+	mapStateToProps,
+	{ setDanger }
+)(App);

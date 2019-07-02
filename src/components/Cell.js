@@ -1,13 +1,12 @@
 import React from 'react';
 import MARK_TYPES from '../constants/MARK_TYPES';
 
-export default function Cell({ cell, onCellClick, onCellRightClick }) {
+export default function Cell({ cell, onCellClick, onCellRightClick, onCellMouseDown }) {
 	return (
 		<div
 			onClick={onCellClick}
 			onContextMenu={event => event.preventDefault() || onCellRightClick()}
-			onMouseDown={() => console.log('down')}
-			onMouseUp={() => console.log('up')}
+			onMouseDown={onCellMouseDown}
 			style={{
 				height: 40,
 				width: 40,
