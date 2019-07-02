@@ -8,7 +8,7 @@ export default function({ getState, dispatch }) {
 			timeInterval = setInterval(() => dispatch(incrementTime()), 1000);
 		}
 
-		if (action.type === ACTIONS.LOSE_GAME || action.type === ACTIONS.RESET) {
+		if (action.type === ACTIONS.LOSE_GAME || action.type === ACTIONS.WIN_GAME || action.type === ACTIONS.RESET) {
 			clearInterval(timeInterval);
 		}
 		next(action);

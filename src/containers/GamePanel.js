@@ -5,14 +5,14 @@ import { createSelector } from 'reselect';
 
 function GamePanel({ reset, time, unflaggedBombs }) {
 	return (
-		<div>
-			<span>⏱: </span> <span>{time}</span>
-			<span>💣: </span> <span>{unflaggedBombs}</span>
+		<>
 			<div>
-				<button onClick={reset}>RESET</button>
-				<button>Test</button>
+				<span>⏱: </span> <span>{time}</span>
 			</div>
-		</div>
+			<div>
+				<span>💣: </span> <span>{unflaggedBombs}</span>
+			</div>
+		</>
 	);
 }
 
