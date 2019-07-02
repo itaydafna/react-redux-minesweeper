@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { revealCell, markCell } from '../actions';
-import MARK_TYPES from '../constants/MARK_TYPES';
+import Cell from '../components/Cell';
 
 function GameBoard({ grid, revealCell, markCell }) {
 	const onCellClick = ({ row, column }) => {
@@ -15,26 +15,12 @@ function GameBoard({ grid, revealCell, markCell }) {
 	return grid.map((columns, row) => (
 		<div key={row} style={{ display: 'flex', justifyContent: 'center' }}>
 			{columns.map((cell, column) => (
-				<div
+				<Cell
 					key={column}
-					onClick={() => onCellClick({ row, column })}
-					onContextMenu={event => event.preventDefault() || onCellRightClick({ row, column })}
-					style={{
-						height: 40,
-						width: 40,
-						border: '1px solid black',
-						display: 'flex',
-						alignItems: 'center',
-						justifyContent: 'center',
-						cursor: 'pointer',
-					}}
-				>
-					{!cell.isRevealed && ''}
-					{cell.isRevealed && cell.isBomb && '💣'}
-					{cell.isRevealed && !cell.isBomb && cell.adjacentBombs}
-					{!cell.isRevealed && cell.mark === MARK_TYPES.FLAG && '🚩'}
-					{!cell.isRevealed && cell.mark === MARK_TYPES.QUESTION_MARK && '?'}
-				</div>
+					cell={cell}
+					onCellClick={() => onCellClick({ row, column })}
+					onCellRightClick={() => onCellRightClick({ row, column })}
+				/>
 			))}
 		</div>
 	));
