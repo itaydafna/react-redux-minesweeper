@@ -1,6 +1,6 @@
 import ACTIONS from '../constants/ACTION_TYPES';
 import traverseAdjacentCells from '../services/traverseAdjacentCells';
-import { revealCell, gameOver } from '../actions';
+import { revealCell, loseGame } from '../actions';
 
 export default function({ getState, dispatch }) {
 	return next => action => {
@@ -17,7 +17,7 @@ export default function({ getState, dispatch }) {
 
 		//if bomb is revealed reveal all grid (game over)
 		if (cell.isBomb) {
-			return dispatch(gameOver());
+			return dispatch(loseGame());
 		}
 
 		//if empty cell is revealed  - start "chain reaction" - revealing all adjacent unrevealed none-bomb grid

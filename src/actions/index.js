@@ -11,7 +11,8 @@ export const {
 	incrementFlags,
 	decrementFlags,
 	startGame,
-	gameOver,
+	loseGame,
+	winGame,
 	reset,
 	incrementTime,
 } = createActions({}, ...Object.values(ACTIONS));

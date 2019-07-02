@@ -23,7 +23,7 @@ function row(state = [], action) {
 				cell(state[action.payload.column], action),
 				...state.slice(action.payload.column + 1),
 			];
-		case ACTIONS.GAME_OVER:
+		case ACTIONS.LOSE_GAME:
 		case ACTIONS.RESET:
 			return state.map(c => cell(c, action));
 		default:
@@ -44,7 +44,7 @@ function grid(state = initialState.grid, action) {
 				row(state[action.payload.row], action),
 				...state.slice(action.payload.row + 1),
 			];
-		case ACTIONS.GAME_OVER:
+		case ACTIONS.LOSE_GAME:
 		case ACTIONS.RESET:
 			return state.map(r => row(r, action));
 		default:
@@ -66,7 +66,7 @@ export default function gameBoard(state = initialState, action) {
 		case ACTIONS.ALLOCATE_BOMB:
 		case ACTIONS.ALLOCATE_ADJACENT_BOMBS:
 		case ACTIONS.SET_MARK:
-		case ACTIONS.GAME_OVER:
+		case ACTIONS.LOSE_GAME:
 			return {
 				...state,
 				grid: grid(state.grid, action),

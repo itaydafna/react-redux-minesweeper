@@ -20,7 +20,7 @@ export default function cell(state = initialState, action) {
 				mark: action.payload.mark,
 			};
 		case ACTIONS.REVEAL_CELL:
-		case ACTIONS.GAME_OVER:
+		case ACTIONS.LOSE_GAME:
 			return { ...state, isRevealed: true };
 		case ACTIONS.RESET:
 			return initialState;
