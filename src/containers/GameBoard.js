@@ -1,45 +1,33 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { revealCell, markCell, setDanger } from '../actions';
-import Cell from '../components/Cell';
+import { createSelector } from 'reselect';
+import Cell from './Cell';
 
-function GameBoard({ grid, revealCell, markCell, setDanger }) {
-	const onCellClick = ({ row, column }) => {
-		!grid[row][column].isRevealed && revealCell({ row, column });
-	};
-
-	const onCellRightClick = ({ row, column }) => {
-		!grid[row][column].isRevealed && markCell({ row, column });
-	};
-
-	const onCellMouseDown = e => e.nativeEvent.which === 1 && setDanger(true);
-
-	return grid.map((columns, row) => (
+function GameBoard({ numRows, numColumns }) {
+	return [...new Array(numRows)].map((_, row) => (
 		<div key={row} style={{ display: 'flex', justifyContent: 'center' }}>
-			{columns.map((cell, column) => (
-				<Cell
-					key={column}
-					cell={cell}
-					onCellClick={() => onCellClick({ row, column })}
-					onCellRightClick={() => onCellRightClick({ row, column })}
-					onCellMouseDown={onCellMouseDown}
-				/>
+			{[...new Array(numColumns)].map((_, column) => (
+				<Cell key={column} row={row} column={column} />
 			))}
 		</div>
 	));
 }
 
+const gridSelector = state => state.gameBoard.grid;
+
+const numRowsSelector = createSelector(
+	gridSelector,
+	grid => grid.length
+);
+
+const numColumnsSelector = createSelector(
+	gridSelector,
+	grid => grid[0] && grid[0].length
+);
+
 const mapStateToProps = state => ({
-	grid: state.gameBoard.grid,
+	numRows: numRowsSelector(state),
+	numColumns: numColumnsSelector(state),
 });
 
-const mapDispatchToProps = {
-	revealCell,
-	markCell,
-	setDanger,
-};
-
-export default connect(
-	mapStateToProps,
-	mapDispatchToProps
-)(GameBoard);
+export default connect(mapStateToProps)(GameBoard);
