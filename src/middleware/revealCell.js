@@ -1,5 +1,5 @@
 import ACTIONS from '../constants/ACTION_TYPES';
-import traverseAdjacentCells from '../services/traverseAdjacentCells';
+import traverseAdjacentCells from '../services/traverseAdjacentCells.ts';
 import { revealCell, loseGame } from '../actions';
 
 export default function({ getState, dispatch }) {
@@ -27,8 +27,8 @@ export default function({ getState, dispatch }) {
 				grid,
 				row,
 				column,
-				callback: ({ row, column, cell }) =>
-					!cell.isBomb && !cell.isRevealed && dispatch(revealCell({ row, column })),
+				callback: ({ row, column }) =>
+					!grid[row][column].isBomb && !grid[row][column].isRevealed && dispatch(revealCell({ row, column })),
 			});
 			return;
 		}

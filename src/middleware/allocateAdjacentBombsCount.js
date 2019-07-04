@@ -1,5 +1,5 @@
 import ACTIONS from '../constants/ACTION_TYPES';
-import traverseAdjacentCells from '../services/traverseAdjacentCells';
+import traverseAdjacentCells from '../services/traverseAdjacentCells.ts';
 import { allocateAdjacentBombs, startGame } from '../actions';
 
 export default function({ getState, dispatch }) {
@@ -18,7 +18,7 @@ export default function({ getState, dispatch }) {
 					grid,
 					row,
 					column,
-					callback: ({ cell }) => cell.isBomb && ++adjacentBombs,
+					callback: ({ row, column }) => grid[row][column].isBomb && ++adjacentBombs,
 				});
 				dispatch(allocateAdjacentBombs({ row, column, adjacentBombs }));
 			});
