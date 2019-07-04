@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import MARK_TYPES from '../constants/MARK_TYPES';
 import { connect } from 'react-redux';
-import { createSelector } from 'reselect';
 import { revealCell, markCell, setDanger } from '../actions';
 
 const StyledCell = styled.div`

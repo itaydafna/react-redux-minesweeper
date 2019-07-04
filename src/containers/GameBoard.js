@@ -1,15 +1,21 @@
 import React from 'react';
+import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import Cell from './Cell';
 
+const StyledRow = styled.div`
+	display: flex;
+	justify-content: center;
+`;
+
 function GameBoard({ numRows, numColumns }) {
 	return [...new Array(numRows)].map((_, row) => (
-		<div key={row} style={{ display: 'flex', justifyContent: 'center' }}>
+		<StyledRow key={row}>
 			{[...new Array(numColumns)].map((_, column) => (
 				<Cell key={column} row={row} column={column} />
 			))}
-		</div>
+		</StyledRow>
 	));
 }
 
