@@ -2,7 +2,19 @@ import { SET_MARK, SET_DANGER } from './../types/ACTION_TYPES';
 import { action, createStandardAction } from 'typesafe-actions';
 import * as ACTIONS from '../types/ACTION_TYPES';
 import { MARK } from '../types/MARK_TYPES';
-import { CellLocationPayload, AllocateAdjacentBombsPayload, MarkCellPayload } from '../types/payloadTypes';
+
+export interface CellLocationPayload {
+	row: number;
+	column: number;
+}
+
+export interface AllocateAdjacentBombsPayload extends CellLocationPayload {
+	adjacentBombs: number;
+}
+
+export interface MarkCellPayload extends CellLocationPayload {
+	mark: MARK;
+}
 
 export const configGameBoard = createStandardAction(ACTIONS.CONFIG_GAME_BOARD)<undefined>();
 export const allocateBomb = createStandardAction(ACTIONS.ALLOCATE_BOMB)<CellLocationPayload>();
