@@ -1,7 +1,7 @@
 import React, { useEffect, useCallback } from 'react';
 import { connect } from 'react-redux';
-import { configGameBoard } from '../actions';
-import GAME_STAGE_TYPES from '../constants/GAME_STAGE_TYPES';
+import { configGameBoard } from '../actions/index.ts';
+import GAME_STAGE_TYPES from '../types/GAME_STAGE_TYPES';
 
 function GameConfig({ gameStage, rows: r, columns: c, bombs: b, configGameBoard }) {
 	const onBoardConfig = useCallback(

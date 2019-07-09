@@ -13,7 +13,7 @@ function GameBoard({ numRows, numColumns }) {
 	return [...new Array(numRows)].map((_, row) => (
 		<StyledRow key={row}>
 			{[...new Array(numColumns)].map((_, column) => (
-				<Cell key={column} row={row} column={column} />
+			  <Cell key={column} row={row} column={column} />
 			))}
 		</StyledRow>
 	));

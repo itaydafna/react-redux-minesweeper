@@ -1,10 +1,10 @@
 import React from 'react';
 import GameConfig from './containers/GameConfig';
 import ResetButton from './containers/ResetButton';
-import GameBoard from './containers/GameBoard.tsx';
+import GameBoard from './containers/GameBoard';
 import GamePanel from './containers/GamePanel';
 import { connect } from 'react-redux';
-import { setDanger } from './actions';
+import { setDanger } from './actions/index.ts';
 
 import './App.css';
 

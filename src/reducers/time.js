@@ -1,4 +1,4 @@
-import ACTIONS from '../constants/ACTION_TYPES';
+import * as ACTIONS from '../types/ACTION_TYPES.ts';
 
 export default function time(state = 0, action) {
 	switch (action.type) {

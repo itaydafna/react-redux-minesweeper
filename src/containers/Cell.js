@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import MARK_TYPES from '../constants/MARK_TYPES';
+import { FLAG, QUESTION_MARK } from '../types/MARK_TYPES';
 import { connect } from 'react-redux';
-import { revealCell, markCell, setDanger } from '../actions';
+import { revealCell, markCell, setDanger } from '../actions/index.ts';
 
 const StyledCell = styled.div`
 	height: 40px;
@@ -33,8 +33,8 @@ function Cell({ cell, row, column, revealCell, markCell, setDanger }) {
 			{!cell.isRevealed && ''}
 			{cell.isRevealed && cell.isBomb && '💣'}
 			{cell.isRevealed && !cell.isBomb && cell.adjacentBombs}
-			{!cell.isRevealed && cell.mark === MARK_TYPES.FLAG && '🚩'}
-			{!cell.isRevealed && cell.mark === MARK_TYPES.QUESTION_MARK && '?'}
+			{!cell.isRevealed && cell.mark === FLAG && '🚩'}
+			{!cell.isRevealed && cell.mark === QUESTION_MARK && '?'}
 		</StyledCell>
 	);
 }

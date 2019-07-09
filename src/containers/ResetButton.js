@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
-import { reset, winGame } from '../actions';
+import { reset, winGame } from '../actions/index.ts';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import MARK_TYPES from '../constants/MARK_TYPES';
-import GAME_STAGE_TYPES from '../constants/GAME_STAGE_TYPES';
+import { FLAG } from '../types/MARK_TYPES';
+import GAME_STAGE_TYPES from '../types/GAME_STAGE_TYPES';
 
 function ResetButton({ reset, isGameWon, gameStage, winGame, danger }) {
 	useEffect(() => {
@@ -24,9 +24,7 @@ const isGameWonSelector = createSelector(
 	state => state.gameBoard.isDirty,
 	(grid, isDirty) =>
 		isDirty &&
-		grid.every(row =>
-			row.every(cell => (cell.isBomb && cell.mark === MARK_TYPES.FLAG) || (!cell.isBomb && cell.isRevealed))
-		)
+		grid.every(row => row.every(cell => (cell.isBomb && cell.mark === FLAG) || (!cell.isBomb && cell.isRevealed)))
 );
 
 const mapStateToProps = state => ({

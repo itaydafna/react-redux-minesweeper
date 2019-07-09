@@ -1,6 +1,6 @@
-import ACTIONS from '../constants/ACTION_TYPES';
+import * as ACTIONS from '../types/ACTION_TYPES.ts';
 import { random, flatten } from 'lodash/fp';
-import { allocateBomb } from '../actions';
+import { allocateBomb } from '../actions/index.ts';
 
 export default function({ getState, dispatch }) {
 	return next => action => {
@@ -12,7 +12,12 @@ export default function({ getState, dispatch }) {
 		}
 
 		const bombCandidatePool = flatten(
-			[...new Array(rows)].map((_, row) => [...new Array(columns)].map((_, column) => ({ row, column })))
+			[...new Array(rows)].map((_, row) =>
+				[...new Array(columns)].map((_, column) => ({
+					row,
+					column,
+				}))
+			)
 		)
 			//filter out first revealed cell from "bomb-candidates"
 			.filter(cell => !(cell.row === action.payload.row && cell.column === action.payload.column));

@@ -1,6 +1,6 @@
-import ACTIONS from '../constants/ACTION_TYPES';
-import MARK_TYPES from '../constants/MARK_TYPES';
-import { setMark, incrementFlags, decrementFlags } from '../actions';
+import * as ACTIONS from '../types/ACTION_TYPES.ts';
+import { FLAG, QUESTION_MARK, NONE } from '../types/MARK_TYPES';
+import { setMark, incrementFlags, decrementFlags } from '../actions/index.ts';
 
 export default function({ getState, dispatch }) {
 	return next => action => {
@@ -11,13 +11,13 @@ export default function({ getState, dispatch }) {
 			let nextMark = '';
 			const { row, column } = action.payload;
 			const cell = grid[row][column];
-			if (cell.mark === MARK_TYPES.NONE) nextMark = MARK_TYPES.FLAG;
-			if (cell.mark === MARK_TYPES.FLAG) nextMark = MARK_TYPES.QUESTION_MARK;
-			if (cell.mark === MARK_TYPES.QUESTION_MARK) nextMark = MARK_TYPES.NONE;
+			if (cell.mark === NONE) nextMark = FLAG;
+			if (cell.mark === FLAG) nextMark = QUESTION_MARK;
+			if (cell.mark === QUESTION_MARK) nextMark = NONE;
 
 			dispatch(setMark({ row, column, mark: nextMark }));
-			if (nextMark === MARK_TYPES.FLAG) dispatch(incrementFlags());
-			if (nextMark === MARK_TYPES.QUESTION_MARK) dispatch(decrementFlags());
+			if (nextMark === FLAG) dispatch(incrementFlags());
+			if (nextMark === QUESTION_MARK) dispatch(decrementFlags());
 		}
 
 		next(action);

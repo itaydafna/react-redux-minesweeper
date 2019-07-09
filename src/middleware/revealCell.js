@@ -1,6 +1,6 @@
-import ACTIONS from '../constants/ACTION_TYPES';
+import * as ACTIONS from '../types/ACTION_TYPES.ts';
 import traverseAdjacentCells from '../services/traverseAdjacentCells.ts';
-import { revealCell, loseGame } from '../actions';
+import { revealCell, loseGame } from '../actions/index.ts';
 
 export default function({ getState, dispatch }) {
 	return next => action => {

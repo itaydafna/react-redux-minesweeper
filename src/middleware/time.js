@@ -1,5 +1,5 @@
-import ACTIONS from '../constants/ACTION_TYPES';
-import { incrementTime } from '../actions';
+import * as ACTIONS from '../types/ACTION_TYPES.ts';
+import { incrementTime } from '../actions/index.ts';
 
 export default function({ getState, dispatch }) {
 	let timeInterval = null;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { reset } from '../actions';
+import { reset } from '../actions/index.ts';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 
@@ -7,10 +7,17 @@ function GamePanel({ reset, time, unflaggedBombs }) {
 	return (
 		<>
 			<div>
-				<span>⏱: </span> <span>{time}</span>
+				<span role="img" aria-label="Time">
+					⏱
+				</span>
+				<span> :</span> <span> {time}</span>
 			</div>
 			<div>
-				<span>💣: </span> <span>{unflaggedBombs}</span>
+				<span role="img" aria-label="Bomb">
+					💣
+				</span>
+				<span> :</span>
+				<span>{unflaggedBombs}</span>
 			</div>
 		</>
 	);

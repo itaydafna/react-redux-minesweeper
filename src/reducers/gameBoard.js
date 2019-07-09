@@ -1,5 +1,5 @@
-import ACTIONS from '../constants/ACTION_TYPES';
-import cell from './cell';
+import * as ACTIONS from '../types/ACTION_TYPES.ts';
+import cell from './cell.ts';
 
 const initialState = {
 	isDirty: false,
