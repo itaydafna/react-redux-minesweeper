@@ -24,7 +24,7 @@ export default function cell(state = initialState, action: CellAction): CellStat
 			return { ...state, isBomb: true };
 		case getType(cellActions.allocateAdjacentBombs):
 			return { ...state, adjacentBombs: action.payload.adjacentBombs };
-		case getType(cellActions.setMark):
+		case getType(cellActions.markCell):
 			return {
 				...state,
 				mark: action.payload.mark,

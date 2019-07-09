@@ -21,8 +21,7 @@ export const allocateAdjacentBombs = createStandardAction(ACTIONS.ALLOCATE_ADJAC
 	AllocateAdjacentBombsPayload
 >();
 export const revealCell = createStandardAction(ACTIONS.REVEAL_CELL)<CellLocationPayload>();
-export const markCell = createStandardAction(ACTIONS.MARK_CELL)<CellLocationPayload>();
-export const setMark = createStandardAction(ACTIONS.SET_MARK)<MarkCellPayload>();
+export const markCell = createStandardAction(ACTIONS.MARK_CELL)<MarkCellPayload>();
 
 export const incrementFlags = createStandardAction(ACTIONS.INCREMENT_FLAGS)<undefined>();
 export const decrementFlags = createStandardAction(ACTIONS.DECREMENT_FLAGS)<undefined>();
@@ -33,4 +32,4 @@ export const reset = createStandardAction(ACTIONS.RESET)<undefined>();
 export const incrementTime = createStandardAction(ACTIONS.INCREMENT_TIME)<undefined>();
 export const setDanger = createStandardAction(ACTIONS.SET_DANGER)<boolean>();
 
-export const cellActions = { allocateBomb, allocateAdjacentBombs, setMark, revealCell, loseGame, reset };
+export const cellActions = { allocateBomb, allocateAdjacentBombs, markCell, revealCell, loseGame, reset };

@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import { FLAG, QUESTION_MARK } from '../types/MARK_TYPES';
+import { FLAG, QUESTION_MARK, NONE } from '../types/MARK_TYPES';
 import { connect } from 'react-redux';
-import { revealCell, markCell, setDanger } from '../actions/index.ts';
+import { revealCell, markCell, setDanger, incrementFlags, decrementFlags } from '../actions/index.ts';
 
 const StyledCell = styled.div`
 	height: 40px;
@@ -14,13 +14,23 @@ const StyledCell = styled.div`
 	cursor: pointer;
 `;
 
-function Cell({ cell, row, column, revealCell, markCell, setDanger }) {
+function setNextMark(currentMark) {
+	if (currentMark === NONE) return FLAG;
+	if (currentMark === FLAG) return QUESTION_MARK;
+	if (currentMark === QUESTION_MARK) return NONE;
+}
+
+function Cell({ cell, row, column, revealCell, markCell, setDanger, incrementFlags, decrementFlags }) {
 	const onCellClick = () => {
 		!cell.isRevealed && revealCell({ row, column });
 	};
 
 	const onCellRightClick = () => {
-		!cell.isRevealed && markCell({ row, column });
+		if (cell.isRevealed) return;
+		const nextMark = setNextMark(cell.mark);
+		markCell({ row, column, mark: nextMark });
+		if (nextMark === FLAG) incrementFlags();
+		if (nextMark === QUESTION_MARK) decrementFlags();
 	};
 
 	const onCellMouseDown = e => e.nativeEvent.which === 1 && setDanger(true);
@@ -47,6 +57,8 @@ const mapDispatchToProps = {
 	revealCell,
 	markCell,
 	setDanger,
+	incrementFlags,
+	decrementFlags,
 };
 
 export default connect(
