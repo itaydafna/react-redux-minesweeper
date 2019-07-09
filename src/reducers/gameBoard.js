@@ -2,7 +2,6 @@ import * as ACTIONS from '../types/ACTION_TYPES.ts';
 import cell from './cell.ts';
 
 const initialState = {
-	isDirty: false,
 	columns: 6,
 	rows: 6,
 	bombs: 6,
@@ -74,7 +73,6 @@ export default function gameBoard(state = initialState, action) {
 		case ACTIONS.REVEAL_CELL:
 			return {
 				...state,
-				isDirty: true,
 				grid: grid(state.grid, action),
 			};
 		case ACTIONS.INCREMENT_FLAGS:
@@ -90,7 +88,6 @@ export default function gameBoard(state = initialState, action) {
 		case ACTIONS.RESET:
 			return {
 				...state,
-				isDirty: false,
 				flags: 0,
 				grid: grid(state.grid, action),
 			};

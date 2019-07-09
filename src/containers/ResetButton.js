@@ -21,9 +21,9 @@ function ResetButton({ reset, isGameWon, gameStage, winGame, danger }) {
 
 const isGameWonSelector = createSelector(
 	state => state.gameBoard.grid,
-	state => state.gameBoard.isDirty,
-	(grid, isDirty) =>
-		isDirty &&
+	state => state.gameStage === PLAY,
+	(grid, isPlay) =>
+		isPlay &&
 		grid.every(row => row.every(cell => (cell.isBomb && cell.mark === FLAG) || (!cell.isBomb && cell.isRevealed)))
 );
 

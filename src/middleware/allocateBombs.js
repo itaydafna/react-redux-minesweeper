@@ -1,13 +1,15 @@
 import * as ACTIONS from '../types/ACTION_TYPES.ts';
 import { random, flatten } from 'lodash/fp';
 import { allocateBomb } from '../actions/index.ts';
+import { PLAY } from '../types/game-stage-types.ts';
 
 export default function({ getState, dispatch }) {
 	return next => action => {
 		const {
-			gameBoard: { isDirty, bombs, columns, rows },
+			gameBoard: { bombs, columns, rows },
+			gameStage,
 		} = getState();
-		if (isDirty || action.type !== ACTIONS.REVEAL_CELL) {
+		if (gameStage === PLAY || action.type !== ACTIONS.REVEAL_CELL) {
 			return next(action);
 		}
 
