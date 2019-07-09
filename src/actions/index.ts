@@ -1,5 +1,4 @@
-import { SET_MARK, SET_DANGER } from './../types/ACTION_TYPES';
-import { action, createStandardAction } from 'typesafe-actions';
+import { createStandardAction } from 'typesafe-actions';
 import * as ACTIONS from '../types/ACTION_TYPES';
 import { MARK } from '../types/MARK_TYPES';
 
