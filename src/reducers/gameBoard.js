@@ -3,8 +3,6 @@ import cell from './cell.ts';
 
 const initialState = {
 	isDirty: false,
-	//when mousedown on unrevealed cell
-	danger: false,
 	columns: 6,
 	rows: 6,
 	bombs: 6,
