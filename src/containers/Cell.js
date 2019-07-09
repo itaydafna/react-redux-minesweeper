@@ -50,7 +50,7 @@ function Cell({ cell, row, column, revealCell, markCell, setDanger, incrementFla
 }
 
 const mapStateToProps = (state, { row, column }) => ({
-	cell: state.gameBoard.grid[row][column],
+	cell: state.gameBoard[row][column],
 });
 
 const mapDispatchToProps = {

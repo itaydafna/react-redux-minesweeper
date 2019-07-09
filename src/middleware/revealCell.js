@@ -4,16 +4,14 @@ import { revealCell, loseGame } from '../actions/index.ts';
 
 export default function({ getState, dispatch }) {
 	return next => action => {
-		const {
-			gameBoard: { grid },
-		} = getState();
+		const { gameBoard } = getState();
 
 		if (action.type !== ACTIONS.REVEAL_CELL) {
 			return next(action);
 		}
 
 		const { row, column } = action.payload;
-		const cell = grid[row][column];
+		const cell = gameBoard[row][column];
 
 		//if bomb is revealed reveal all grid (game over)
 		if (cell.isBomb) {
@@ -24,11 +22,13 @@ export default function({ getState, dispatch }) {
 		if (!cell.adjacentBombs) {
 			next(action);
 			traverseAdjacentCells({
-				grid,
+				gameBoard,
 				row,
 				column,
 				callback: ({ row, column }) =>
-					!grid[row][column].isBomb && !grid[row][column].isRevealed && dispatch(revealCell({ row, column })),
+					!gameBoard[row][column].isBomb &&
+					!gameBoard[row][column].isRevealed &&
+					dispatch(revealCell({ row, column })),
 			});
 			return;
 		}

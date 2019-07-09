@@ -13,22 +13,22 @@ function GameBoard({ numRows, numColumns }) {
 	return [...new Array(numRows)].map((_, row) => (
 		<StyledRow key={row}>
 			{[...new Array(numColumns)].map((_, column) => (
-			  <Cell key={column} row={row} column={column} />
+				<Cell key={column} row={row} column={column} />
 			))}
 		</StyledRow>
 	));
 }
 
-const gridSelector = state => state.gameBoard.grid;
+const gameBoardSelector = state => state.gameBoard;
 
 const numRowsSelector = createSelector(
-	gridSelector,
-	grid => grid.length
+	gameBoardSelector,
+	gameBoard => gameBoard.length
 );
 
 const numColumnsSelector = createSelector(
-	gridSelector,
-	grid => grid[0] && grid[0].length
+	gameBoardSelector,
+	gameBoard => gameBoard[0] && gameBoard[0].length
 );
 
 const mapStateToProps = state => ({

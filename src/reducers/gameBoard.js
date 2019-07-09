@@ -1,9 +1,7 @@
 import * as ACTIONS from '../types/ACTION_TYPES.ts';
 import cell from './cell.ts';
 
-const initialState = {
-	grid: [],
-};
+const initialState = [];
 
 function row(state = [], action) {
 	switch (action.type) {
@@ -26,7 +24,7 @@ function row(state = [], action) {
 	}
 }
 
-function grid(state = initialState.grid, action) {
+export default function gameBoard(state = initialState, action) {
 	switch (action.type) {
 		case ACTIONS.CONFIG_GAME_BOARD:
 			return [...new Array(action.payload.rows)].map(() => row(undefined, action));
@@ -42,38 +40,6 @@ function grid(state = initialState.grid, action) {
 		case ACTIONS.LOSE_GAME:
 		case ACTIONS.RESET:
 			return state.map(r => row(r, action));
-		default:
-			return state;
-	}
-}
-
-export default function gameBoard(state = initialState, action) {
-	switch (action.type) {
-		case ACTIONS.CONFIG_GAME_BOARD:
-			return {
-				...state,
-				grid: grid(state.grid, action),
-			};
-
-		case ACTIONS.ALLOCATE_BOMB:
-		case ACTIONS.ALLOCATE_ADJACENT_BOMBS:
-		case ACTIONS.MARK_CELL:
-		case ACTIONS.LOSE_GAME:
-			return {
-				...state,
-				grid: grid(state.grid, action),
-			};
-		case ACTIONS.REVEAL_CELL:
-			return {
-				...state,
-				grid: grid(state.grid, action),
-			};
-		case ACTIONS.RESET:
-			return {
-				...state,
-				grid: grid(state.grid, action),
-			};
-
 		default:
 			return state;
 	}
