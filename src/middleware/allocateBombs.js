@@ -6,7 +6,7 @@ import { PLAY } from '../types/game-stage-types.ts';
 export default function({ getState, dispatch }) {
 	return next => action => {
 		const {
-			gameBoard: { bombs, columns, rows },
+			configuration: { bombs, columns, rows },
 			gameStage,
 		} = getState();
 		if (gameStage === PLAY || action.type !== ACTIONS.REVEAL_CELL) {

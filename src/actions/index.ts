@@ -1,6 +1,7 @@
 import { createStandardAction } from 'typesafe-actions';
 import * as ACTIONS from '../types/ACTION_TYPES';
 import { MARK } from '../types/mark-types';
+import { ConfigurationState } from '../reducers/configuration';
 
 export interface CellLocationPayload {
 	row: number;
@@ -15,7 +16,7 @@ export interface MarkCellPayload extends CellLocationPayload {
 	mark: MARK;
 }
 
-export const configGameBoard = createStandardAction(ACTIONS.CONFIG_GAME_BOARD)<undefined>();
+export const configGameBoard = createStandardAction(ACTIONS.CONFIG_GAME_BOARD)<ConfigurationState>();
 export const allocateBomb = createStandardAction(ACTIONS.ALLOCATE_BOMB)<CellLocationPayload>();
 export const allocateAdjacentBombs = createStandardAction(ACTIONS.ALLOCATE_ADJACENT_BOMBS)<
 	AllocateAdjacentBombsPayload

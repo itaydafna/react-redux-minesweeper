@@ -54,9 +54,9 @@ function GameConfig({ gameStage, rows: r, columns: c, bombs: b, configGameBoard 
 
 const mapStateToProps = state => ({
 	gameStage: state.gameStage,
-	rows: state.gameBoard.rows,
-	columns: state.gameBoard.columns,
-	bombs: state.gameBoard.bombs,
+	rows: state.configuration.rows,
+	columns: state.configuration.columns,
+	bombs: state.configuration.bombs,
 });
 
 const mapDispatchToProps = {

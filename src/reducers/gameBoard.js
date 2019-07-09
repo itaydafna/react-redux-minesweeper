@@ -2,9 +2,6 @@ import * as ACTIONS from '../types/ACTION_TYPES.ts';
 import cell from './cell.ts';
 
 const initialState = {
-	columns: 6,
-	rows: 6,
-	bombs: 6,
 	flags: 0,
 	grid: [],
 };
@@ -56,9 +53,6 @@ export default function gameBoard(state = initialState, action) {
 		case ACTIONS.CONFIG_GAME_BOARD:
 			return {
 				...state,
-				columns: action.payload.columns,
-				rows: action.payload.rows,
-				bombs: action.payload.bombs,
 				grid: grid(state.grid, action),
 			};
 
