@@ -2,8 +2,8 @@ import React, { useEffect } from 'react';
 import { reset, winGame } from '../actions/index.ts';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import { FLAG } from '../types/MARK_TYPES';
-import GAME_STAGE_TYPES from '../types/GAME_STAGE_TYPES';
+import { FLAG } from '../types/mark-types';
+import { BOARD_CONFIG, GAME_LOST, GAME_WON, PLAY } from '../types/game-stage-types.ts';
 
 function ResetButton({ reset, isGameWon, gameStage, winGame, danger }) {
 	useEffect(() => {
@@ -11,9 +11,9 @@ function ResetButton({ reset, isGameWon, gameStage, winGame, danger }) {
 	}, [isGameWon, winGame]);
 	return (
 		<button onClick={reset}>
-			{!danger && (gameStage === GAME_STAGE_TYPES.PLAY || gameStage === GAME_STAGE_TYPES.BOARD_CONFIG) && '😀'}
-			{!danger && gameStage === GAME_STAGE_TYPES.GAME_WON && '😎'}
-			{!danger && gameStage === GAME_STAGE_TYPES.GAME_LOST && '😵'}
+			{!danger && (gameStage === PLAY || gameStage === BOARD_CONFIG) && '😀'}
+			{!danger && gameStage === GAME_WON && '😎'}
+			{!danger && gameStage === GAME_LOST && '😵'}
 			{danger && '😧'}
 		</button>
 	);

@@ -1,6 +1,6 @@
 import { ActionType, getType } from 'typesafe-actions';
-import { cellActions } from '../actions/index';
-import { MARK, NONE } from '../types/MARK_TYPES';
+import { cellActions } from '../actions';
+import { MARK, NONE } from '../types/mark-types';
 
 export interface CellState {
 	readonly isRevealed: boolean;

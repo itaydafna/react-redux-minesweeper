@@ -1,7 +1,7 @@
 import React, { useEffect, useCallback } from 'react';
 import { connect } from 'react-redux';
 import { configGameBoard } from '../actions/index.ts';
-import GAME_STAGE_TYPES from '../types/GAME_STAGE_TYPES';
+import { BOARD_CONFIG } from '../types/game-stage-types';
 
 function GameConfig({ gameStage, rows: r, columns: c, bombs: b, configGameBoard }) {
 	const onBoardConfig = useCallback(
@@ -14,7 +14,7 @@ function GameConfig({ gameStage, rows: r, columns: c, bombs: b, configGameBoard 
 	}, [onBoardConfig]);
 
 	return (
-		gameStage === GAME_STAGE_TYPES.BOARD_CONFIG && (
+		gameStage === BOARD_CONFIG && (
 			<div>
 				<div>
 					<label htmlFor="rows">Rows:</label>

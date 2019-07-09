@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { FLAG, QUESTION_MARK, NONE } from '../types/MARK_TYPES';
+import { FLAG, QUESTION_MARK, NONE } from '../types/mark-types';
 import { connect } from 'react-redux';
 import { revealCell, markCell, setDanger, incrementFlags, decrementFlags } from '../actions/index.ts';
 

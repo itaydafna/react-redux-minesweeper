@@ -1,6 +1,0 @@
-export default {
-	BOARD_CONFIG: 'BOARD_CONFIG',
-	PLAY: 'PLAY',
-	GAME_LOST: 'GAME_LOST',
-	GAME_WON: 'GAME_WON',
-};

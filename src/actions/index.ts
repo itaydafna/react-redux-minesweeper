@@ -1,6 +1,6 @@
 import { createStandardAction } from 'typesafe-actions';
 import * as ACTIONS from '../types/ACTION_TYPES';
-import { MARK } from '../types/MARK_TYPES';
+import { MARK } from '../types/mark-types';
 
 export interface CellLocationPayload {
 	row: number;
@@ -33,3 +33,4 @@ export const incrementTime = createStandardAction(ACTIONS.INCREMENT_TIME)<undefi
 export const setDanger = createStandardAction(ACTIONS.SET_DANGER)<boolean>();
 
 export const cellActions = { allocateBomb, allocateAdjacentBombs, markCell, revealCell, loseGame, reset };
+export const gameStageActions = { loseGame, winGame, startGame, reset };
