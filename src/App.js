@@ -21,7 +21,7 @@ function App({ danger, setDanger }) {
 }
 
 const mapStateToProps = state => ({
-	danger: state.gameBoard.danger,
+	danger: state.danger,
 });
 
 export default connect(

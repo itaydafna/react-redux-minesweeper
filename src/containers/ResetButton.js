@@ -30,7 +30,7 @@ const isGameWonSelector = createSelector(
 const mapStateToProps = state => ({
 	isGameWon: isGameWonSelector(state),
 	gameStage: state.gameStage,
-	danger: state.gameBoard.danger,
+	danger: state.danger,
 });
 
 const mapDispatchToProps = {

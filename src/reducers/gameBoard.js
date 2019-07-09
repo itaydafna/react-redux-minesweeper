@@ -97,12 +97,6 @@ export default function gameBoard(state = initialState, action) {
 				grid: grid(state.grid, action),
 			};
 
-		case ACTIONS.SET_DANGER:
-			return {
-				...state,
-				danger: action.payload.danger,
-			};
-
 		default:
 			return state;
 	}
