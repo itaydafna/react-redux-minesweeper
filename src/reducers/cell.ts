@@ -1,6 +1,5 @@
-import { ActionType } from 'typesafe-actions';
+import { ActionType, getType } from 'typesafe-actions';
 import { cellActions } from '../actions/index';
-import { ALLOCATE_BOMB, ALLOCATE_ADJACENT_BOMBS, SET_MARK, REVEAL_CELL, LOSE_GAME, RESET } from '../types/ACTION_TYPES';
 import { MARK, NONE } from '../types/MARK_TYPES';
 
 export interface CellState {
@@ -21,19 +20,19 @@ const initialState: CellState = {
 
 export default function cell(state = initialState, action: CellAction): CellState {
 	switch (action.type) {
-		case ALLOCATE_BOMB:
+		case getType(cellActions.allocateBomb):
 			return { ...state, isBomb: true };
-		case ALLOCATE_ADJACENT_BOMBS:
+		case getType(cellActions.allocateAdjacentBombs):
 			return { ...state, adjacentBombs: action.payload.adjacentBombs };
-		case SET_MARK:
+		case getType(cellActions.setMark):
 			return {
 				...state,
 				mark: action.payload.mark,
 			};
-		case REVEAL_CELL:
-		case LOSE_GAME:
+		case getType(cellActions.revealCell):
+		case getType(cellActions.loseGame):
 			return { ...state, isRevealed: true };
-		case RESET:
+		case getType(cellActions.reset):
 			return initialState;
 		default:
 			return state;
