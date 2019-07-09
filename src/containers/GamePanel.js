@@ -25,7 +25,7 @@ function GamePanel({ reset, time, unflaggedBombs }) {
 
 const unflaggedBombsSelector = createSelector(
 	state => state.configuration.bombs,
-	state => state.gameBoard.flags,
+	state => state.flags,
 	(bombs, flags) => bombs - flags
 );
 

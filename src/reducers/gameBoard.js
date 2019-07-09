@@ -2,7 +2,6 @@ import * as ACTIONS from '../types/ACTION_TYPES.ts';
 import cell from './cell.ts';
 
 const initialState = {
-	flags: 0,
 	grid: [],
 };
 
@@ -69,20 +68,9 @@ export default function gameBoard(state = initialState, action) {
 				...state,
 				grid: grid(state.grid, action),
 			};
-		case ACTIONS.INCREMENT_FLAGS:
-			return {
-				...state,
-				flags: ++state.flags,
-			};
-		case ACTIONS.DECREMENT_FLAGS:
-			return {
-				...state,
-				flags: --state.flags,
-			};
 		case ACTIONS.RESET:
 			return {
 				...state,
-				flags: 0,
 				grid: grid(state.grid, action),
 			};
 
