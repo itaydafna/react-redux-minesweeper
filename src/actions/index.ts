@@ -32,6 +32,3 @@ export const winGame = createStandardAction(ACTIONS.WIN_GAME)<undefined>();
 export const reset = createStandardAction(ACTIONS.RESET)<undefined>();
 export const incrementTime = createStandardAction(ACTIONS.INCREMENT_TIME)<undefined>();
 export const setDanger = createStandardAction(ACTIONS.SET_DANGER)<boolean>();
-
-export const cellActions = { allocateBomb, allocateAdjacentBombs, markCell, revealCell, loseGame, reset };
-export const gameStageActions = { loseGame, winGame, startGame, reset };

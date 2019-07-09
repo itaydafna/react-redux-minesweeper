@@ -1,6 +1,16 @@
 import { ActionType, getType } from 'typesafe-actions';
-import { cellActions } from '../actions';
+import {
+	configGameBoard,
+	allocateBomb,
+	allocateAdjacentBombs,
+	markCell,
+	revealCell,
+	loseGame,
+	reset,
+} from '../actions';
 import { MARK, NONE } from '../types/mark-types';
+
+const cellActions = { configGameBoard, allocateBomb, allocateAdjacentBombs, markCell, revealCell, loseGame, reset };
 
 export interface CellState {
 	readonly isRevealed: boolean;
@@ -20,19 +30,19 @@ const initialState: CellState = {
 
 export default function cell(state = initialState, action: CellAction): CellState {
 	switch (action.type) {
-		case getType(cellActions.allocateBomb):
+		case getType(allocateBomb):
 			return { ...state, isBomb: true };
-		case getType(cellActions.allocateAdjacentBombs):
+		case getType(allocateAdjacentBombs):
 			return { ...state, adjacentBombs: action.payload.adjacentBombs };
-		case getType(cellActions.markCell):
+		case getType(markCell):
 			return {
 				...state,
 				mark: action.payload.mark,
 			};
-		case getType(cellActions.revealCell):
-		case getType(cellActions.loseGame):
+		case getType(revealCell):
+		case getType(loseGame):
 			return { ...state, isRevealed: true };
-		case getType(cellActions.reset):
+		case getType(reset):
 			return initialState;
 		default:
 			return state;
