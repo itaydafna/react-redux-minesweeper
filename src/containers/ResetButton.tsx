@@ -1,11 +1,21 @@
 import React, { useEffect } from 'react';
-import { reset, winGame } from '../actions/index.ts';
+import { reset, winGame } from '../actions/index';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import { FLAG } from '../types/mark-types';
-import { BOARD_CONFIG, GAME_LOST, GAME_WON, PLAY } from '../types/game-stage-types.ts';
+import { BOARD_CONFIG, GAME_LOST, GAME_WON, PLAY } from '../types/game-stage-types';
+import { RootState } from '../configureStore';
+import { GameStage } from '../types/game-stage-types';
 
-function ResetButton({ reset, isGameWon, gameStage, winGame, danger }) {
+type Props = {
+	reset: () => void;
+	isGameWon: boolean;
+	gameStage: GameStage;
+	winGame: () => void;
+	danger: boolean;
+};
+
+const ResetButton: React.FC<Props> = ({ reset, isGameWon, gameStage, winGame, danger }) => {
 	useEffect(() => {
 		if (isGameWon) winGame();
 	}, [isGameWon, winGame]);
@@ -17,11 +27,11 @@ function ResetButton({ reset, isGameWon, gameStage, winGame, danger }) {
 			{danger && '😧'}
 		</button>
 	);
-}
+};
 
 const isGameWonSelector = createSelector(
-	state => state.gameBoard,
-	state => state.gameStage === PLAY,
+	(state: RootState) => state.gameBoard,
+	(state: RootState) => state.gameStage === PLAY,
 	(gameBoard, isPlay) =>
 		isPlay &&
 		gameBoard.every(row =>
@@ -29,7 +39,7 @@ const isGameWonSelector = createSelector(
 		)
 );
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state: RootState) => ({
 	isGameWon: isGameWonSelector(state),
 	gameStage: state.gameStage,
 	danger: state.danger,
