@@ -24,7 +24,6 @@ export default function({ getState, dispatch }) {
 			//filter out first revealed cell from "bomb-candidates"
 			.filter(cell => !(cell.row === action.payload.row && cell.column === action.payload.column));
 
-		console.log('here allocateBombs');
 		for (let i = 0; i < bombs; i++) {
 			const randomCellIndex = random(0, bombCandidatePool.length - 1);
 			const randomCell = bombCandidatePool.splice(randomCellIndex, 1)[0];

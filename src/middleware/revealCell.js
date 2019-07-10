@@ -20,21 +20,20 @@ export default function({ getState, dispatch }) {
 		if (cell.isBomb) {
 			return dispatch(loseGame());
 		}
-		console.log('here reveal');
 		//if empty cell is revealed  - start "chain reaction" - revealing all adjacent unrevealed none-bomb grid
 		if (!cell.adjacentBombs) {
 			next(action);
-			console.log('revealCell');
 			traverseAdjacentCells({
 				numRows,
 				numColumns,
 				row,
 				column,
-				callback: ({ row, column }) =>
+				callback: ({ row, column }) => {
+					const { gameBoard } = getState();
 					!gameBoard[row][column].isBomb &&
-					//TODO: i think this might be causing too many calls - since cells don't get chance to be revealed
-					!gameBoard[row][column].isRevealed &&
-					dispatch(revealCell({ row, column })),
+						!gameBoard[row][column].isRevealed &&
+						dispatch(revealCell({ row, column }));
+				},
 			});
 			return;
 		}

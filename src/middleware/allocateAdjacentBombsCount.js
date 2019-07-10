@@ -13,7 +13,6 @@ export default function({ getState, dispatch }) {
 		if (gameStage === PLAY || action.type !== ACTIONS.REVEAL_CELL) {
 			return next(action);
 		}
-		console.log('here allocateAdj');
 		gameBoard.forEach((columns, row) => {
 			columns.forEach((_, column) => {
 				let adjacentBombs = 0;
