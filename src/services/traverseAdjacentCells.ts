@@ -8,38 +8,40 @@ interface CellLocation {
 }
 
 export default function traverseAdjacentCells({
-	gameBoard,
+	numRows,
+	numColumns,
 	row,
 	column,
 	callback,
 }: {
-	gameBoard: object[][];
+	numRows: number;
+	numColumns: number;
 	row: number;
 	column: number;
 	callback: (cellLocation: CellLocation) => void;
 }): void {
-	if (gameBoard[row - 1] && gameBoard[row - 1][column - 1]) {
-		callback(Object.freeze({ row: row - 1, column: column - 1 }));
+	if (row - 1 >= 0) {
+		callback({ row: row - 1, column });
 	}
-	if (gameBoard[row - 1] && gameBoard[row - 1][column]) {
-		callback(Object.freeze({ row: row - 1, column }));
+	if (row - 1 >= 0 && column - 1 >= 0) {
+		callback({ row: row - 1, column: column - 1 });
 	}
-	if (gameBoard[row - 1] && gameBoard[row - 1][column + 1]) {
-		callback(Object.freeze({ row: row - 1, column: column + 1 }));
+	if (row - 1 >= 0 && column + 1 < numColumns) {
+		callback({ row: row - 1, column: column + 1 });
 	}
-	if (gameBoard[row][column - 1]) {
-		callback(Object.freeze({ row, column: column - 1 }));
+	if (column - 1 >= 0) {
+		callback({ row, column: column - 1 });
 	}
-	if (gameBoard[row][column + 1]) {
-		callback(Object.freeze({ row, column: column + 1 }));
+	if (column + 1 < numColumns) {
+		callback({ row, column: column + 1 });
 	}
-	if (gameBoard[row + 1] && gameBoard[row + 1][column - 1]) {
-		callback(Object.freeze({ row: row + 1, column: column - 1 }));
+	if (row + 1 < numRows) {
+		callback({ row: row + 1, column });
 	}
-	if (gameBoard[row + 1] && gameBoard[row + 1][column]) {
-		callback(Object.freeze({ row: row + 1, column }));
+	if (row + 1 < numRows && column - 1 >= 0) {
+		callback({ row: row + 1, column: column - 1 });
 	}
-	if (gameBoard[row + 1] && gameBoard[row + 1][column + 1]) {
-		callback(Object.freeze({ row: row + 1, column: column + 1 }));
+	if (row + 1 < numRows && column + 1 < numColumns) {
+		callback({ row: row + 1, column: column + 1 });
 	}
 }

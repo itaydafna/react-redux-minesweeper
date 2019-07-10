@@ -4,7 +4,10 @@ import { revealCell, loseGame } from '../actions/index.ts';
 
 export default function({ getState, dispatch }) {
 	return next => action => {
-		const { gameBoard } = getState();
+		const {
+			gameBoard,
+			configuration: { numRows, numColumns },
+		} = getState();
 
 		if (action.type !== ACTIONS.REVEAL_CELL) {
 			return next(action);
@@ -17,16 +20,19 @@ export default function({ getState, dispatch }) {
 		if (cell.isBomb) {
 			return dispatch(loseGame());
 		}
-
+		console.log('here reveal');
 		//if empty cell is revealed  - start "chain reaction" - revealing all adjacent unrevealed none-bomb grid
 		if (!cell.adjacentBombs) {
 			next(action);
+			console.log('revealCell');
 			traverseAdjacentCells({
-				gameBoard,
+				numRows,
+				numColumns,
 				row,
 				column,
 				callback: ({ row, column }) =>
 					!gameBoard[row][column].isBomb &&
+					//TODO: i think this might be causing too many calls - since cells don't get chance to be revealed
 					!gameBoard[row][column].isRevealed &&
 					dispatch(revealCell({ row, column })),
 			});

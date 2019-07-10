@@ -29,7 +29,7 @@ export type GameBoardAction = ActionType<typeof gameBoardActions>;
 function row(state: RowState = [], action: GameBoardAction): RowState {
 	switch (action.type) {
 		case getType(configGameBoard):
-			return [...new Array(action.payload.columns)].map(() => cell(undefined, action));
+			return [...new Array(action.payload.numColumns)].map(() => cell(undefined, action));
 		case getType(allocateBomb):
 		case getType(allocateAdjacentBombs):
 		case getType(revealCell):
@@ -50,7 +50,7 @@ function row(state: RowState = [], action: GameBoardAction): RowState {
 export default function gameBoard(state: GameBoardState = [], action: GameBoardAction): GameBoardState {
 	switch (action.type) {
 		case getType(configGameBoard):
-			return [...new Array(action.payload.rows)].map(() => row(undefined, action));
+			return [...new Array(action.payload.numRows)].map(() => row(undefined, action));
 		case getType(allocateBomb):
 		case getType(allocateAdjacentBombs):
 		case getType(revealCell):

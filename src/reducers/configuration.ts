@@ -4,14 +4,14 @@ import { configGameBoard } from '../actions';
 export type ConfigAction = ActionType<typeof configGameBoard>;
 
 export interface ConfigurationState {
-	readonly rows: number;
-	readonly columns: number;
+	readonly numRows: number;
+	readonly numColumns: number;
 	readonly bombs: number;
 }
 
 const initialState: ConfigurationState = {
-	columns: 6,
-	rows: 6,
+	numColumns: 6,
+	numRows: 6,
 	bombs: 6,
 };
 

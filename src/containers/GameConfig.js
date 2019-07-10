@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import { configGameBoard } from '../actions/index.ts';
 import { BOARD_CONFIG } from '../types/game-stage-types';
 
-function GameConfig({ gameStage, rows: r, columns: c, bombs: b, configGameBoard }) {
+function GameConfig({ gameStage, numRows: r, numColumns: c, bombs: b, configGameBoard }) {
 	const onBoardConfig = useCallback(
-		({ rows = r, columns = c, bombs = b } = {}) => configGameBoard({ rows, columns, bombs }),
+		({ numRows = r, numColumns = c, bombs = b } = {}) => configGameBoard({ numRows, numColumns, bombs }),
 		[b, c, configGameBoard, r]
 	);
 
@@ -23,7 +23,7 @@ function GameConfig({ gameStage, rows: r, columns: c, bombs: b, configGameBoard 
 						type="number"
 						value={r}
 						min={2}
-						onChange={({ target: { value } }) => onBoardConfig({ rows: Number(value) })}
+						onChange={({ target: { value } }) => onBoardConfig({ numRows: Number(value) })}
 					/>
 				</div>
 				<div>
@@ -33,7 +33,7 @@ function GameConfig({ gameStage, rows: r, columns: c, bombs: b, configGameBoard 
 						type="number"
 						value={c}
 						min={2}
-						onChange={({ target: { value } }) => onBoardConfig({ columns: Number(value) })}
+						onChange={({ target: { value } }) => onBoardConfig({ numColumns: Number(value) })}
 					/>
 				</div>
 				<div>
@@ -54,8 +54,8 @@ function GameConfig({ gameStage, rows: r, columns: c, bombs: b, configGameBoard 
 
 const mapStateToProps = state => ({
 	gameStage: state.gameStage,
-	rows: state.configuration.rows,
-	columns: state.configuration.columns,
+	numRows: state.configuration.numRows,
+	numColumns: state.configuration.numColumns,
 	bombs: state.configuration.bombs,
 });
 
