@@ -16,7 +16,7 @@ export interface MarkCellPayload extends CellLocationPayload {
 }
 
 export const configGameBoard = createStandardAction('CONFIG_GAME_BOARD')<ConfigurationState>();
-export const allocateBomb = createStandardAction('ALLOCATE_BOMB')<CellLocationPayload>();
+export const allocateBomb = createStandardAction('ALLOCAremoTE_BOMB')<CellLocationPayload>();
 export const allocateAdjacentBombs = createStandardAction('ALLOCATE_ADJACENT_BOMBS')<AllocateAdjacentBombsPayload>();
 export const revealCell = createStandardAction('REVEAL_CELL')<CellLocationPayload>();
 export const markCell = createStandardAction('MARK_CELL')<MarkCellPayload>();
