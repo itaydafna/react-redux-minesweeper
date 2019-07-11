@@ -1,8 +1,18 @@
 import React from 'react';
 import styled from 'styled-components';
-import { FLAG, QUESTION_MARK, NONE } from '../types/mark-types';
+import { FLAG, QUESTION_MARK, NONE, MARK } from '../types/mark-types';
 import { connect } from 'react-redux';
-import { revealCell, markCell, setDanger, incrementFlags, decrementFlags } from '../actions/index.ts';
+import {
+	revealCell,
+	markCell,
+	setDanger,
+	incrementFlags,
+	decrementFlags,
+	CellLocationPayload,
+	MarkCellPayload,
+} from '../actions';
+import { RootState } from '../configureStore';
+import { CellState } from '../reducers/cell';
 
 const StyledCell = styled.div`
 	height: 40px;
@@ -14,18 +24,39 @@ const StyledCell = styled.div`
 	cursor: pointer;
 `;
 
-function setNextMark(currentMark) {
+function setNextMark(currentMark: MARK): MARK {
 	if (currentMark === NONE) return FLAG;
 	if (currentMark === FLAG) return QUESTION_MARK;
-	if (currentMark === QUESTION_MARK) return NONE;
+	return NONE;
 }
 
-function Cell({ cell, row, column, revealCell, markCell, setDanger, incrementFlags, decrementFlags }) {
+type Props = {
+	cell: CellState;
+	row: number;
+	column: number;
+	revealCell: (payload: CellLocationPayload) => void;
+	markCell: (payload: MarkCellPayload) => void;
+	setDanger: (danger: boolean) => void;
+	incrementFlags: () => void;
+	decrementFlags: () => void;
+};
+
+const Cell: React.FC<Props> = ({
+	cell,
+	row,
+	column,
+	revealCell,
+	markCell,
+	setDanger,
+	incrementFlags,
+	decrementFlags,
+}) => {
 	const onCellClick = () => {
 		!cell.isRevealed && revealCell({ row, column });
 	};
 
-	const onCellRightClick = () => {
+	const onCellRightClick = (event: React.MouseEvent) => {
+		event.preventDefault();
 		if (cell.isRevealed) return;
 		const nextMark = setNextMark(cell.mark);
 		markCell({ row, column, mark: nextMark });
@@ -33,13 +64,9 @@ function Cell({ cell, row, column, revealCell, markCell, setDanger, incrementFla
 		if (nextMark === QUESTION_MARK) decrementFlags();
 	};
 
-	const onCellMouseDown = e => e.nativeEvent.which === 1 && setDanger(true);
+	const onCellMouseDown = (event: React.MouseEvent) => event.nativeEvent.which === 1 && setDanger(true);
 	return (
-		<StyledCell
-			onClick={onCellClick}
-			onContextMenu={event => event.preventDefault() || onCellRightClick()}
-			onMouseDown={onCellMouseDown}
-		>
+		<StyledCell onClick={onCellClick} onContextMenu={onCellRightClick} onMouseDown={onCellMouseDown}>
 			{!cell.isRevealed && ''}
 			{cell.isRevealed && cell.isBomb && '💣'}
 			{cell.isRevealed && !cell.isBomb && cell.adjacentBombs}
@@ -47,9 +74,9 @@ function Cell({ cell, row, column, revealCell, markCell, setDanger, incrementFla
 			{!cell.isRevealed && cell.mark === QUESTION_MARK && '?'}
 		</StyledCell>
 	);
-}
+};
 
-const mapStateToProps = (state, { row, column }) => ({
+const mapStateToProps = (state: RootState, { row, column }: CellLocationPayload) => ({
 	cell: state.gameBoard[row][column],
 });
 

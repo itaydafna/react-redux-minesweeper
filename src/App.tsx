@@ -4,7 +4,7 @@ import ResetButton from './containers/ResetButton';
 import GameBoard from './containers/GameBoard';
 import GamePanel from './containers/GamePanel';
 import { connect } from 'react-redux';
-import { setDanger } from './actions/index';
+import { setDanger } from './actions';
 import { RootState } from './configureStore';
 
 import './App.css';

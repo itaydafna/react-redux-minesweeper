@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { reset, winGame } from '../actions/index';
+import { reset, winGame } from '../actions';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import { FLAG } from '../types/mark-types';

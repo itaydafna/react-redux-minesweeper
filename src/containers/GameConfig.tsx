@@ -17,12 +17,12 @@ type Props = {
 const GameConfig: React.FC<Props> = ({ gameStage, numRows, numColumns, bombs, configGameBoard }) => {
 	const onBoardConfig = useCallback(
 		({ numRows, numColumns, bombs }: ConfigurationState) => configGameBoard({ numRows, numColumns, bombs }),
-		[numRows, numColumns, bombs, configGameBoard]
+		[configGameBoard]
 	);
 
 	useEffect(() => {
 		onBoardConfig({ numRows, numColumns, bombs });
-	}, [onBoardConfig]);
+	}, [onBoardConfig, numRows, numColumns, bombs]);
 
 	if (gameStage !== BOARD_CONFIG) return null;
 
