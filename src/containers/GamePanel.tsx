@@ -1,9 +1,14 @@
 import React from 'react';
-import { reset } from '../actions/index.ts';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
+import { RootState } from '../configureStore';
 
-function GamePanel({ reset, time, unflaggedBombs }) {
+type Props = {
+	time: number;
+	unflaggedBombs: number;
+};
+
+const GamePanel: React.FC<Props> = ({ time, unflaggedBombs }) => {
 	return (
 		<>
 			<div>
@@ -21,24 +26,17 @@ function GamePanel({ reset, time, unflaggedBombs }) {
 			</div>
 		</>
 	);
-}
+};
 
 const unflaggedBombsSelector = createSelector(
-	state => state.configuration.bombs,
-	state => state.flags,
+	(state: RootState) => state.configuration.bombs,
+	(state: RootState) => state.flags,
 	(bombs, flags) => bombs - flags
 );
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state: RootState) => ({
 	unflaggedBombs: unflaggedBombsSelector(state),
 	time: state.time,
 });
 
-const mapDispatchToProps = {
-	reset,
-};
-
-export default connect(
-	mapStateToProps,
-	mapDispatchToProps
-)(GamePanel);
+export default connect(mapStateToProps)(GamePanel);
