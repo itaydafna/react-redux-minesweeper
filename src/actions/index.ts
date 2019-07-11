@@ -1,5 +1,4 @@
 import { createStandardAction } from 'typesafe-actions';
-import * as ACTIONS from '../types/ACTION_TYPES';
 import { MARK } from '../types/mark-types';
 import { ConfigurationState } from '../reducers/configuration';
 
@@ -16,19 +15,17 @@ export interface MarkCellPayload extends CellLocationPayload {
 	mark: MARK;
 }
 
-export const configGameBoard = createStandardAction(ACTIONS.CONFIG_GAME_BOARD)<ConfigurationState>();
-export const allocateBomb = createStandardAction(ACTIONS.ALLOCATE_BOMB)<CellLocationPayload>();
-export const allocateAdjacentBombs = createStandardAction(ACTIONS.ALLOCATE_ADJACENT_BOMBS)<
-	AllocateAdjacentBombsPayload
->();
-export const revealCell = createStandardAction(ACTIONS.REVEAL_CELL)<CellLocationPayload>();
-export const markCell = createStandardAction(ACTIONS.MARK_CELL)<MarkCellPayload>();
+export const configGameBoard = createStandardAction('CONFIG_GAME_BOARD')<ConfigurationState>();
+export const allocateBomb = createStandardAction('ALLOCATE_BOMB')<CellLocationPayload>();
+export const allocateAdjacentBombs = createStandardAction('ALLOCATE_ADJACENT_BOMBS')<AllocateAdjacentBombsPayload>();
+export const revealCell = createStandardAction('REVEAL_CELL')<CellLocationPayload>();
+export const markCell = createStandardAction('MARK_CELL')<MarkCellPayload>();
 
-export const incrementFlags = createStandardAction(ACTIONS.INCREMENT_FLAGS)<undefined>();
-export const decrementFlags = createStandardAction(ACTIONS.DECREMENT_FLAGS)<undefined>();
-export const startGame = createStandardAction(ACTIONS.START_GAME)<undefined>();
-export const loseGame = createStandardAction(ACTIONS.LOSE_GAME)<undefined>();
-export const winGame = createStandardAction(ACTIONS.WIN_GAME)<undefined>();
-export const reset = createStandardAction(ACTIONS.RESET)<undefined>();
-export const incrementTime = createStandardAction(ACTIONS.INCREMENT_TIME)<undefined>();
-export const setDanger = createStandardAction(ACTIONS.SET_DANGER)<boolean>();
+export const incrementFlags = createStandardAction('INCREMENT_FLAGS')<undefined>();
+export const decrementFlags = createStandardAction('DECREMENT_FLAGS')<undefined>();
+export const startGame = createStandardAction('START_GAME')<undefined>();
+export const loseGame = createStandardAction('LOSE_GAME')<undefined>();
+export const winGame = createStandardAction('WIN_GAME')<undefined>();
+export const reset = createStandardAction('RESET')<undefined>();
+export const incrementTime = createStandardAction('INCREMENT_TIME')<undefined>();
+export const setDanger = createStandardAction('SET_DANGER')<boolean>();
