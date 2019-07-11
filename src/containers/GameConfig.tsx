@@ -14,14 +14,14 @@ type Props = {
 	configGameBoard: (configuration: ConfigurationState) => void;
 };
 
-const GameConfig: React.FC<Props> = ({ gameStage, numRows: r, numColumns: c, bombs: b, configGameBoard }) => {
+const GameConfig: React.FC<Props> = ({ gameStage, numRows, numColumns, bombs, configGameBoard }) => {
 	const onBoardConfig = useCallback(
-		({ numRows = r, numColumns = c, bombs = b } = {}) => configGameBoard({ numRows, numColumns, bombs }),
-		[b, c, configGameBoard, r]
+		({ numRows, numColumns, bombs }: ConfigurationState) => configGameBoard({ numRows, numColumns, bombs }),
+		[numRows, numColumns, bombs, configGameBoard]
 	);
 
 	useEffect(() => {
-		onBoardConfig();
+		onBoardConfig({ numRows, numColumns, bombs });
 	}, [onBoardConfig]);
 
 	if (gameStage !== BOARD_CONFIG) return null;
@@ -33,9 +33,9 @@ const GameConfig: React.FC<Props> = ({ gameStage, numRows: r, numColumns: c, bom
 				<input
 					id="rows"
 					type="number"
-					value={r}
+					value={numRows}
 					min={2}
-					onChange={({ target: { value } }) => onBoardConfig({ numRows: Number(value) })}
+					onChange={({ target: { value } }) => onBoardConfig({ numRows: Number(value), numColumns, bombs })}
 				/>
 			</div>
 			<div>
@@ -43,9 +43,9 @@ const GameConfig: React.FC<Props> = ({ gameStage, numRows: r, numColumns: c, bom
 				<input
 					id="columns"
 					type="number"
-					value={c}
+					value={numColumns}
 					min={2}
-					onChange={({ target: { value } }) => onBoardConfig({ numColumns: Number(value) })}
+					onChange={({ target: { value } }) => onBoardConfig({ numRows, numColumns: Number(value), bombs })}
 				/>
 			</div>
 			<div>
@@ -53,10 +53,10 @@ const GameConfig: React.FC<Props> = ({ gameStage, numRows: r, numColumns: c, bom
 				<input
 					id="bombs"
 					type="number"
-					value={b}
+					value={bombs}
 					min={1}
-					max={c * r}
-					onChange={({ target: { value } }) => onBoardConfig({ bombs: Number(value) })}
+					max={numColumns * numRows}
+					onChange={({ target: { value } }) => onBoardConfig({ numRows, numColumns, bombs: Number(value) })}
 				/>
 			</div>
 		</div>
