@@ -9,7 +9,7 @@ export interface ConfigurationState {
 	readonly bombs: number;
 }
 
-const initialState: ConfigurationState = {
+export const initialState: ConfigurationState = {
 	numColumns: 6,
 	numRows: 6,
 	bombs: 6,

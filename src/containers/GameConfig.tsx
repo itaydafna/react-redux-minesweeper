@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback } from 'react';
+import React, { useCallback } from 'react';
 import { connect } from 'react-redux';
 import { configGameBoard } from '../actions/index';
 import { BOARD_CONFIG } from '../types/game-stage-types';
@@ -19,10 +19,6 @@ const GameConfig: React.FC<Props> = ({ gameStage, numRows, numColumns, bombs, co
 		({ numRows, numColumns, bombs }: ConfigurationState) => configGameBoard({ numRows, numColumns, bombs }),
 		[configGameBoard]
 	);
-
-	useEffect(() => {
-		onBoardConfig({ numRows, numColumns, bombs });
-	}, [onBoardConfig, numRows, numColumns, bombs]);
 
 	if (gameStage !== BOARD_CONFIG) return null;
 

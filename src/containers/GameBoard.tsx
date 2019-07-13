@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import { createSelector } from 'reselect';
 import { RootState } from '../configureStore';
 import Cell from './Cell';
 
@@ -35,21 +34,9 @@ const GameBoard: React.FC<Props> = ({ numRows, numColumns }) => {
 	);
 };
 
-const gameBoardSelector = (state: RootState) => state.gameBoard;
-
-const numRowsSelector = createSelector(
-	gameBoardSelector,
-	gameBoard => gameBoard.length
-);
-
-const numColumnsSelector = createSelector(
-	gameBoardSelector,
-	gameBoard => gameBoard[0] && gameBoard[0].length
-);
-
 const mapStateToProps = (state: RootState) => ({
-	numRows: numRowsSelector(state),
-	numColumns: numColumnsSelector(state),
+	numRows: state.configuration.numRows,
+	numColumns: state.configuration.numColumns,
 });
 
 export default connect(mapStateToProps)(GameBoard);

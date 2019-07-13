@@ -9,6 +9,7 @@ import {
 	reset,
 } from '../actions';
 import cell, { CellState } from './cell';
+import { initialState as configurationInitialState } from './configuration';
 
 const gameBoardActions = {
 	configGameBoard,
@@ -47,7 +48,13 @@ function row(state: RowState = [], action: GameBoardAction): RowState {
 	}
 }
 
-export default function gameBoard(state: GameBoardState = [], action: GameBoardAction): GameBoardState {
+//TODO: Is this legit?
+const initialState: GameBoardState = gameBoard([], {
+	type: getType(configGameBoard),
+	payload: configurationInitialState,
+});
+
+export default function gameBoard(state: GameBoardState = initialState, action: GameBoardAction): GameBoardState {
 	switch (action.type) {
 		case getType(configGameBoard):
 			return [...new Array(action.payload.numRows)].map(() => row(undefined, action));
