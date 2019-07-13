@@ -22,7 +22,6 @@ type Props = {
 };
 
 const GameBoard: React.FC<Props> = ({ numRows, numColumns }) => {
-	console.log(numRows);
 	return (
 		<StyledGameBoard>
 			{[...new Array(numRows)].map((_, row) => (
