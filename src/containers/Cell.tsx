@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { FLAG, QUESTION_MARK, NONE, MARK } from '../types/mark-types';
 import { connect } from 'react-redux';
 import {
@@ -14,14 +14,34 @@ import {
 import { RootState } from '../configureStore';
 import { CellState } from '../reducers/cell';
 
-const StyledCell = styled.div`
-	height: 40px;
-	width: 40px;
-	border: 1px solid black;
+const cellBaseStyle = css`
 	display: flex;
-	align-items: center;
 	justify-content: center;
+	align-items: center;
+	height: 35px;
+	width: 35px;
+	margin: 1px;
+	font-size: 1rem;
+	background-color: #c0c0c0;
+`;
+
+const HiddenCell = styled.button`
+	${cellBaseStyle};
 	cursor: pointer;
+	border: 1.5px solid;
+	border-top-color: #ffffff;
+	border-right-color: #7b7b7b;
+	border-bottom-color: #7b7b7b;
+	border-left-color: #ffffff;
+	outline: none;
+
+	&:active {
+		border-width: 0.5px;
+	}
+`;
+
+const RevealedCell = styled.div`
+	${cellBaseStyle};
 `;
 
 function setNextMark(currentMark: MARK): MARK {
@@ -66,13 +86,20 @@ const Cell: React.FC<Props> = ({
 
 	const onCellMouseDown = (event: React.MouseEvent) => event.nativeEvent.which === 1 && setDanger(true);
 	return (
-		<StyledCell onClick={onCellClick} onContextMenu={onCellRightClick} onMouseDown={onCellMouseDown}>
-			{!cell.isRevealed && ''}
-			{cell.isRevealed && cell.isBomb && '💣'}
-			{cell.isRevealed && !cell.isBomb && cell.adjacentBombs}
-			{!cell.isRevealed && cell.mark === FLAG && '🚩'}
-			{!cell.isRevealed && cell.mark === QUESTION_MARK && '?'}
-		</StyledCell>
+		<>
+			{!cell.isRevealed && (
+				<HiddenCell onClick={onCellClick} onContextMenu={onCellRightClick} onMouseDown={onCellMouseDown}>
+					{!cell.isRevealed && cell.mark === FLAG && '🚩'}
+					{!cell.isRevealed && cell.mark === QUESTION_MARK && '?'}
+				</HiddenCell>
+			)}
+			{cell.isRevealed && (
+				<RevealedCell>
+					{cell.isRevealed && cell.isBomb && '💣'}
+					{cell.isRevealed && !cell.isBomb && cell.adjacentBombs}
+				</RevealedCell>
+			)}
+		</>
 	);
 };
 
