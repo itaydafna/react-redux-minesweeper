@@ -36,7 +36,7 @@ const HiddenCell = styled.button`
 	outline: none;
 
 	&:active {
-		border-width: 0.5px;
+		${({ mark }: { mark: MARK }) => mark === NONE && 'border-width: 0.5px'};
 	}
 `;
 
@@ -72,7 +72,7 @@ const Cell: React.FC<Props> = ({
 	decrementFlags,
 }) => {
 	const onCellClick = () => {
-		!cell.isRevealed && revealCell({ row, column });
+		!cell.isRevealed && cell.mark === NONE && revealCell({ row, column });
 	};
 
 	const onCellRightClick = (event: React.MouseEvent) => {
@@ -88,7 +88,12 @@ const Cell: React.FC<Props> = ({
 	return (
 		<>
 			{!cell.isRevealed && (
-				<HiddenCell onClick={onCellClick} onContextMenu={onCellRightClick} onMouseDown={onCellMouseDown}>
+				<HiddenCell
+					onClick={onCellClick}
+					onContextMenu={onCellRightClick}
+					onMouseDown={onCellMouseDown}
+					mark={cell.mark}
+				>
 					{!cell.isRevealed && cell.mark === FLAG && '🚩'}
 					{!cell.isRevealed && cell.mark === QUESTION_MARK && '?'}
 				</HiddenCell>
@@ -96,7 +101,7 @@ const Cell: React.FC<Props> = ({
 			{cell.isRevealed && (
 				<RevealedCell>
 					{cell.isRevealed && cell.isBomb && '💣'}
-					{cell.isRevealed && !cell.isBomb && cell.adjacentBombs}
+					{cell.isRevealed && !!cell.adjacentBombs && cell.adjacentBombs}
 				</RevealedCell>
 			)}
 		</>
