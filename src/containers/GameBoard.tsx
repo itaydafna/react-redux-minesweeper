@@ -5,6 +5,12 @@ import { createSelector } from 'reselect';
 import { RootState } from '../configureStore';
 import Cell from './Cell';
 
+const StyledGameBoard = styled.div`
+	display: inline-block;
+	background: #d3d3d3;
+	padding: 2px;
+`;
+
 const StyledRow = styled.div`
 	display: flex;
 	justify-content: center;
@@ -17,7 +23,7 @@ type Props = {
 
 const GameBoard: React.FC<Props> = ({ numRows, numColumns }) => {
 	return (
-		<>
+		<StyledGameBoard>
 			{[...new Array(numRows)].map((_, row) => (
 				<StyledRow key={row}>
 					{[...new Array(numColumns)].map((_, column) => (
@@ -25,7 +31,7 @@ const GameBoard: React.FC<Props> = ({ numRows, numColumns }) => {
 					))}
 				</StyledRow>
 			))}
-		</>
+		</StyledGameBoard>
 	);
 };
 
