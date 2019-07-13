@@ -6,6 +6,7 @@ import { FLAG } from '../types/mark-types';
 import { BOARD_CONFIG, GAME_LOST, GAME_WON, PLAY } from '../types/game-stage-types';
 import { RootState } from '../configureStore';
 import { GameStage } from '../types/game-stage-types';
+import { HiddenCell as StyledStatusButton } from './Cell';
 
 type Props = {
 	reset: () => void;
@@ -15,17 +16,17 @@ type Props = {
 	danger: boolean;
 };
 
-const ResetButton: React.FC<Props> = ({ reset, isGameWon, gameStage, winGame, danger }) => {
+const StatusButton: React.FC<Props> = ({ reset, isGameWon, gameStage, winGame, danger }) => {
 	useEffect(() => {
 		if (isGameWon) winGame();
 	}, [isGameWon, winGame]);
 	return (
-		<button onClick={reset}>
+		<StyledStatusButton onClick={reset}>
 			{!danger && (gameStage === PLAY || gameStage === BOARD_CONFIG) && '😀'}
 			{!danger && gameStage === GAME_WON && '😎'}
 			{!danger && gameStage === GAME_LOST && '😵'}
 			{danger && '😧'}
-		</button>
+		</StyledStatusButton>
 	);
 };
 
@@ -53,4 +54,4 @@ const mapDispatchToProps = {
 export default connect(
 	mapStateToProps,
 	mapDispatchToProps
-)(ResetButton);
+)(StatusButton);

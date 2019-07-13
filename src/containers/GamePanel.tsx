@@ -10,7 +10,7 @@ type Props = {
 
 const GamePanel: React.FC<Props> = ({ time, unflaggedBombs }) => {
 	return (
-		<>
+		<div>
 			<div>
 				<span role="img" aria-label="Time">
 					⏱
@@ -24,7 +24,7 @@ const GamePanel: React.FC<Props> = ({ time, unflaggedBombs }) => {
 				<span> :</span>
 				<span>{unflaggedBombs}</span>
 			</div>
-		</>
+		</div>
 	);
 };
 

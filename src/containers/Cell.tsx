@@ -25,7 +25,7 @@ const cellBaseStyle = css`
 	background-color: #c0c0c0;
 `;
 
-const HiddenCell = styled.button`
+export const HiddenCell = styled.button`
 	${cellBaseStyle};
 	cursor: pointer;
 	border: 1.5px solid;
@@ -36,7 +36,7 @@ const HiddenCell = styled.button`
 	outline: none;
 
 	&:active {
-		${({ mark }: { mark: MARK }) => mark === NONE && 'border-width: 0.5px'};
+		${({ mark }: { mark?: MARK }) => (!mark || mark === NONE) && 'border-width: 0.5px'};
 	}
 `;
 
