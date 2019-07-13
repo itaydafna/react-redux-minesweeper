@@ -19,6 +19,8 @@ export default function({ getState, dispatch }: MiddlewareAPI) {
 		}
 		gameBoard.forEach((columns: RowState, row: number) => {
 			columns.forEach((_, column: number) => {
+				//no need to allocate adjacent bombs count to bomb cells
+				if (gameBoard[row][column].isBomb) return;
 				let adjacentBombs = 0;
 				traverseAdjacentCells({
 					numRows,
