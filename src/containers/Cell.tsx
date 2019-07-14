@@ -1,7 +1,8 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import styled, { css } from 'styled-components';
 import { FLAG, QUESTION_MARK, NONE, MARK } from '../types/mark-types';
-import { connect } from 'react-redux';
+import { PLAY, GameStage } from '../types/game-stage-types';
 import {
 	revealCell,
 	markCell,
@@ -54,6 +55,7 @@ type Props = {
 	cell: CellState;
 	row: number;
 	column: number;
+	gameStage: GameStage;
 	revealCell: (payload: CellLocationPayload) => void;
 	markCell: (payload: MarkCellPayload) => void;
 	setDanger: (danger: boolean) => void;
@@ -65,6 +67,7 @@ const Cell: React.FC<Props> = ({
 	cell,
 	row,
 	column,
+	gameStage,
 	revealCell,
 	markCell,
 	setDanger,
@@ -77,14 +80,15 @@ const Cell: React.FC<Props> = ({
 
 	const onCellRightClick = (event: React.MouseEvent) => {
 		event.preventDefault();
-		if (cell.isRevealed) return;
+		if (gameStage !== PLAY || cell.isRevealed) return;
 		const nextMark = setNextMark(cell.mark);
 		markCell({ row, column, mark: nextMark });
 		if (nextMark === FLAG) incrementFlags();
 		if (nextMark === QUESTION_MARK) decrementFlags();
 	};
 
-	const onCellMouseDown = (event: React.MouseEvent) => event.nativeEvent.which === 1 && setDanger(true);
+	const onCellMouseDown = (event: React.MouseEvent) =>
+		event.nativeEvent.which === 1 && cell.mark === NONE && setDanger(true);
 	return (
 		<>
 			{!cell.isRevealed && (
@@ -110,6 +114,7 @@ const Cell: React.FC<Props> = ({
 
 const mapStateToProps = (state: RootState, { row, column }: CellLocationPayload) => ({
 	cell: state.gameBoard[row][column],
+	gameStage: state.gameStage,
 });
 
 const mapDispatchToProps = {
