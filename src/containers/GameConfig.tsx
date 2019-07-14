@@ -23,6 +23,7 @@ function useProfileSelection(initialProfileId: string) {
 }
 
 const GameConfigPanel = styled.div`
+	background: #d3d3d3;
 	display: inline-flex;
 `;
 
