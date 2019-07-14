@@ -19,9 +19,19 @@ const ToBar = styled.div`
 	> div {
 		flex: 1;
 
+		&:nth-child(1) {
+			display: flex;
+			justify-content: flex-start;
+		}
+
 		&:nth-child(2) {
 			display: flex;
 			justify-content: center;
+		}
+
+		&:nth-child(3) {
+			display: flex;
+			justify-content: flex-end;
 		}
 	}
 `;

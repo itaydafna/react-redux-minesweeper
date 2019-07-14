@@ -6,7 +6,7 @@ import { FLAG } from '../types/mark-types';
 import { BOARD_CONFIG, GAME_LOST, GAME_WON, PLAY } from '../types/game-stage-types';
 import { RootState } from '../configureStore';
 import { GameStage } from '../types/game-stage-types';
-import { HiddenCell as StyledStatusButton } from './Cell';
+import { HiddenCell as StyledStatusButton } from '../components/CellThemes';
 
 type Props = {
 	reset: () => void;
