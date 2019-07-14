@@ -73,7 +73,7 @@ const Cell: React.FC<Props> = ({
 				</HiddenCell>
 			)}
 			{cell.isRevealed && (
-				<RevealedCell>
+				<RevealedCell adjacentBombs={cell.adjacentBombs}>
 					{cell.isRevealed && cell.isBomb && '💣'}
 					{cell.isRevealed && !!cell.adjacentBombs && cell.adjacentBombs}
 				</RevealedCell>

@@ -1,6 +1,21 @@
 import styled, { css } from 'styled-components';
 import { NONE, MARK } from '../types/mark-types';
 
+interface NumberColors {
+	[key: number]: string;
+}
+
+const numberColors: NumberColors = {
+	1: '#0007fe',
+	2: '#027f01',
+	3: '#fe0001',
+	4: '#000180',
+	5: '#810002',
+	6: '#008081',
+	7: '#000000',
+	8: '#808080',
+};
+
 const cellBaseStyle = css`
 	display: flex;
 	justify-content: center;
@@ -10,6 +25,7 @@ const cellBaseStyle = css`
 	margin: 1px;
 	font-size: 1rem;
 	background-color: #c0c0c0;
+	font-weight: bold;
 `;
 
 export const HiddenCell = styled.button`
@@ -38,4 +54,5 @@ export const ConfigOptionButton = styled(HiddenCell)`
 
 export const RevealedCell = styled.div`
 	${cellBaseStyle};
+	color: ${({ adjacentBombs }: { adjacentBombs: number }) => !!adjacentBombs && numberColors[adjacentBombs]};
 `;
