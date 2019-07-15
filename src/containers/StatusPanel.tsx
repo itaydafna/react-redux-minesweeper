@@ -1,7 +1,19 @@
 import React from 'react';
+import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import { RootState } from '../configureStore';
+
+const StyledStatusPanel = styled.div`
+	display: flex;
+	flex-direction: column;
+`;
+
+const StatusRow = styled.div`
+	display: flex;
+	align-items: center;
+	margin: 3px 0;
+`;
 
 type Props = {
 	time: number;
@@ -10,21 +22,26 @@ type Props = {
 
 const StatusPanel: React.FC<Props> = ({ time, unflaggedBombs }) => {
 	return (
-		<div>
-			<div>
-				<span role="img" aria-label="Time">
-					⏱
-				</span>
-				<span> :</span> <span> {time}</span>
-			</div>
-			<div>
-				<span role="img" aria-label="Bomb">
-					💣
-				</span>
-				<span> :</span>
+		<StyledStatusPanel>
+			<StatusRow>
+				<div>
+					<span role="img" aria-label="Time">
+						⏱
+					</span>
+					<span> :</span>
+				</div>
+				<span> {time}</span>
+			</StatusRow>
+			<StatusRow>
+				<div>
+					<span role="img" aria-label="Bomb">
+						💣
+					</span>
+					<span> :</span>
+				</div>
 				<span>{unflaggedBombs}</span>
-			</div>
-		</div>
+			</StatusRow>
+		</StyledStatusPanel>
 	);
 };
 
