@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import GameConfig from './containers/GameConfig';
+import GameConfig from './containers/GameConfigPanel';
 import StatusButton from './containers/StatusButton';
 import GameBoard from './containers/GameBoard';
 import GamePanel from './containers/GamePanel';
