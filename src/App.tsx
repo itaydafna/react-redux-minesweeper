@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import GameConfig from './containers/GameConfigPanel';
 import StatusButton from './containers/StatusButton';
 import GameBoard from './containers/GameBoard';
-import GamePanel from './containers/GamePanel';
+import GamePanel from './containers/StatusPanel';
 import { connect } from 'react-redux';
 import { setDanger } from './actions';
 import { RootState } from './configureStore';

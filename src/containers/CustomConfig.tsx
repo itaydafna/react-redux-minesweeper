@@ -14,7 +14,7 @@ const CustomConfigInputWrapper = styled.div`
 
 	> label {
 		display: inline-block;
-		margin: 10px 0;
+		margin: 20px 0;
 	}
 
 	> div {

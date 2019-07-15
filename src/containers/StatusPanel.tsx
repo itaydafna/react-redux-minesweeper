@@ -8,7 +8,7 @@ type Props = {
 	unflaggedBombs: number;
 };
 
-const GamePanel: React.FC<Props> = ({ time, unflaggedBombs }) => {
+const StatusPanel: React.FC<Props> = ({ time, unflaggedBombs }) => {
 	return (
 		<div>
 			<div>
@@ -39,4 +39,4 @@ const mapStateToProps = (state: RootState) => ({
 	time: state.time,
 });
 
-export default connect(mapStateToProps)(GamePanel);
+export default connect(mapStateToProps)(StatusPanel);
